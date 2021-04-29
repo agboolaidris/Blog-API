@@ -4,11 +4,13 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 
-import auth from "./routes/auth";
+import authRoute from "./routes/auth";
+import postRoute from "./routes/post";
 
 dotenv.config();
 
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 //cookie-parser
 app.use(cookieParser());
@@ -18,10 +20,11 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 //setup route
-app.use("/api/auth", auth);
+app.use("/api/auth", authRoute);
+app.use("/api/post", postRoute);
 
-app.listen(5000, async () => {
-  console.log(`app is listen on port 5000`);
+app.listen(PORT, async () => {
+  console.log(`app is listen on port ${PORT}!`);
   try {
     await createConnection();
     console.log("database connected");
