@@ -2,8 +2,10 @@ import { IsEmail, Length } from "class-validator";
 import bcrypt from "bcrypt";
 import { Exclude } from "class-transformer";
 import { Entity as TOEntity, Column, BeforeInsert, OneToMany } from "typeorm";
+
 import Entity from "./entity";
 import { Post } from "./post";
+import { Comment } from "./comment";
 
 @TOEntity("users")
 export class User extends Entity {
@@ -27,6 +29,9 @@ export class User extends Entity {
 
   @OneToMany(() => Post, (post) => post.user, { onDelete: "CASCADE" })
   post: Post[];
+
+  @OneToMany(() => Comment, (comment) => comment.user, { onDelete: "CASCADE" })
+  comment: Comment[];
 
   @BeforeInsert()
   async hashpassword() {

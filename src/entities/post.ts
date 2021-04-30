@@ -1,9 +1,17 @@
-import { Entity as TOEntity, Column, ManyToOne, BeforeInsert } from "typeorm";
+import {
+  Entity as TOEntity,
+  Column,
+  ManyToOne,
+  BeforeInsert,
+  OneToMany,
+} from "typeorm";
+
 import slugify from "slugify";
 import Entity from "./entity";
 import { User } from "./User";
 import { makeId } from "../utils/helper";
 import { Sub } from "./sub";
+import { Comment } from "./comment";
 
 @TOEntity("posts")
 export class Post extends Entity {
@@ -13,7 +21,7 @@ export class Post extends Entity {
   }
 
   @Column({ type: "varchar" })
-  identifer: string;
+  identifier: string;
 
   @Column({ type: "varchar" })
   slug: string;
@@ -27,6 +35,9 @@ export class Post extends Entity {
   @Column({ type: "varchar" })
   subName: string;
 
+  @OneToMany(() => Comment, (comment) => comment.post, { onDelete: "CASCADE" })
+  comment: Comment[];
+
   @ManyToOne(() => User, (user) => user.post)
   user: User;
 
@@ -36,6 +47,6 @@ export class Post extends Entity {
   @BeforeInsert()
   makeSlugAndIdentifer() {
     this.slug = slugify(this.title, { remove: /[*+~.()'"!:@]/g });
-    this.identifer = makeId(7);
+    this.identifier = makeId(7);
   }
 }

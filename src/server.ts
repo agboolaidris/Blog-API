@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 
 import authRoute from "./routes/auth";
 import postRoute from "./routes/post";
+import subRoute from "./routes/sub";
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.use(express.urlencoded());
 //setup route
 app.use("/api/auth", authRoute);
 app.use("/api/post", postRoute);
+app.use("/api/sub", subRoute);
 
 app.listen(PORT, async () => {
   console.log(`app is listen on port ${PORT}!`);
