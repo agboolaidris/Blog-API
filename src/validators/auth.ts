@@ -6,8 +6,8 @@ export const loginValidator = async (req, res, next) => {
   try {
     let error: any = {};
 
-    if (!email) error.email = "email is required";
-    if (!password) error.password = "password is required";
+    if (!email) error.email = "email must not be empty";
+    if (!password) error.password = "password must not be empty";
 
     if (Object.keys(error).length > 0) return res.status(400).json(error);
 
@@ -33,14 +33,13 @@ export const registerValidator = async (req, res, next) => {
     const error: any = {};
 
     //check if the field is exist
-    if (!email || !email.trim()) error.email = "Email is required";
-    if (!username || !username.trim()) error.username = "username is required";
-    if (!password || !password.trim()) error.password = "password is required";
+    if (!email) error.email = "must not be empty ";
+    if (!username) error.username = "must not be empty";
+    if (!password) error.password = "must not be empty";
     if (Object.keys(error).length > 0) return res.status(400).json(error);
 
     //check password length
-    if (password.length < 6)
-      error.password = "password most be greater than 5 digit";
+    if (password.length < 6) error.password = "must be 6 characters or more";
 
     //check password match
     if (password !== password2) error.password2 = "password not match";
@@ -50,7 +49,7 @@ export const registerValidator = async (req, res, next) => {
     const user_email = await User.findOne({ email });
 
     if (user_email)
-      return res.status(400).json({ email: "account already exist " });
+      return res.status(400).json({ email: "email already exist " });
 
     next();
   } catch (error) {

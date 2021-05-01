@@ -3,6 +3,7 @@ import { createConnection } from "typeorm";
 import express from "express";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
+import cors from "cors";
 
 import authRoute from "./routes/auth";
 import postRoute from "./routes/post";
@@ -19,6 +20,9 @@ app.use(cookieParser());
 //setup bodyparser
 app.use(express.json());
 app.use(express.urlencoded());
+
+//config cors
+app.use(cors());
 
 //setup route
 app.use("/api/auth", authRoute);
