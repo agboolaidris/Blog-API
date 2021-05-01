@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Next Home page</title>
+        <title>Reddit:Font page of the Internet</title>
         <meta name="description" content="this is the home age" />
       </Head>
       <div>

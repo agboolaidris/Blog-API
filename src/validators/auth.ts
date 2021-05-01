@@ -12,12 +12,12 @@ export const loginValidator = async (req, res, next) => {
     if (Object.keys(error).length > 0) return res.status(400).json(error);
 
     const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ email: "invalid credentials" });
+    if (!user) return res.status(400).json({ email: "user not found" });
 
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch)
-      return res.status(400).json({ email: "email or password not match" });
+      return res.status(400).json({ password: "email or password not match" });
 
     req.user = user;
     next();
@@ -50,6 +50,12 @@ export const registerValidator = async (req, res, next) => {
 
     if (user_email)
       return res.status(400).json({ email: "email already exist " });
+
+    //check if email already exist in database
+    const user_username = await User.findOne({ username });
+
+    if (user_username)
+      return res.status(400).json({ username: "username already exist " });
 
     next();
   } catch (error) {
