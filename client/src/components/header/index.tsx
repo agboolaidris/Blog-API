@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { logout } from "../../Redux/Action/Auth";
+//import { logout } from "../../Redux/Action/Auth";
 import { useSelector, useDispatch } from "react-redux";
 import Guest from "./Guest";
 import Client from "./Client";
 import classNames from "classnames";
+import Link from "next/link";
+import Image from "next/image";
 
 function Nav() {
   const [state, setstate] = useState(false);
@@ -23,16 +25,12 @@ function Nav() {
   return (
     <header
       className={classNames(
-        "bg-blue-600 sticky top-0 z-50 min-h-screen-10  px-8  ",
-        {
-          "sm:bg-gray-200": false,
-          "sm:bg-gray-600": !false,
-        }
+        "bg-gray-200 sticky top-0 z-50 min-h-screen-10  px-5"
       )}
     >
       <nav className="flex items-center justify-between min-h-screen-10">
         <div
-          className="z-10 text-3xl text-white harmburger sm:hidden"
+          className="z-10 text-3xl harmburger sm:hidden"
           onClick={handleClick}
         >
           {!state ? (
@@ -41,16 +39,16 @@ function Nav() {
             <FontAwesomeIcon icon={faTimes} />
           )}
         </div>
-        <span
-          className={classNames("text-white text-2xl ", {
-            "sm:text-blue-400 text-3xl font-bold": false,
-          })}
-        >
-          IRIS SHOP
-        </span>
+
+        <Link href="/">
+          <a>
+            <Image src="/reddit.svg" width={123} height={70} />
+          </a>
+        </Link>
+
         <ul
           className={classNames(
-            "fixed sm:relative w-screen sm:w-auto min-h-screen-40  sm:min-h-0 top-10vh sm:top-0 transition duration-1000 left-0  right-0 transform  sm:transform-none translate-x-0 bg-blue-600 sm:bg-transparent flex flex-col sm:flex-row justify-center ",
+            "fixed sm:relative w-screen sm:w-auto min-h-screen-40  sm:min-h-0 top-10vh sm:top-0 transition duration-1000 left-0  right-0 transform  sm:transform-none translate-x-0 bg-gray-200 sm:bg-transparent flex flex-col sm:flex-row justify-center ",
             { "-translate-x-full": !state }
           )}
         >
@@ -64,7 +62,7 @@ function Nav() {
         </ul>
         {false && (
           <span
-            onClick={() => dispatch(logout())}
+            // onClick={() => dispatch(logout())}
             className={classNames("text-white hidden sm:block", {
               "sm:text-blue-500 cursor-pointer": false,
             })}

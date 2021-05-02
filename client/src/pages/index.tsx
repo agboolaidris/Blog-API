@@ -11,7 +11,8 @@ export default function Home() {
       </Head>
       <div>
         <h1>Home Page</h1>
-        <Image src="/icon.svg" width={123} height={70} />
+        <Image src="/reddit.svg" width={123} height={70} />
+        <img src="../../public/reddit.svg" alt="" />
         <p>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit.
           Perspiciatis, molestiae aperiam asperiores libero sapiente autem sequi
