@@ -13,7 +13,7 @@ module.exports = {
 
         "10vh": "10vh",
       },
-      container: false,
+
       height: (theme) => ({
         "screen-10": "10vh",
         "screen-20": "20vh",
@@ -48,5 +48,6 @@ module.exports = {
       inset: ["hover", "focus"],
     },
   },
-  pulgin: [],
+
+  plugins: [require("./src/pulgins/Heigh.pulgin")],
 };
