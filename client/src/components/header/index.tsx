@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//import { logout } from "../../Redux/Action/Auth";
-import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import Guest from "./Guest";
 import Client from "./Client";
 import classNames from "classnames";
 import Link from "next/link";
 import Image from "next/image";
+import Search from "../shared/Search";
 
 function Nav() {
+  const { pathname } = useRouter();
+  const notIncludeRoute = ["/signin", "/signup"];
+  const routeNotIncluded = notIncludeRoute.includes(pathname);
+
   const [state, setstate] = useState(false);
-  // const isAuthenticated = useSelector((state) => state.Auth.isAuthenticated);
-  const dispatch = useDispatch();
 
   const handleClick = () => {
     if (state) {
@@ -25,10 +27,20 @@ function Nav() {
   return (
     <header
       className={classNames(
-        "bg-gray-200 sticky top-0 z-50 min-h-screen-10  px-5"
+        "bg-gray-200 sticky top-0 z-50 min-h-screen-10  px-1"
       )}
     >
-      <nav className="flex items-center justify-between min-h-screen-10">
+      <nav className="relative flex items-center justify-between h-screen-10 ">
+        {/* logo */}
+        <Link href="/">
+          <a>
+            <Image src="/reddit.svg" width={120} height={70} />
+          </a>
+        </Link>
+
+        {!routeNotIncluded && <Search />}
+
+        {/* harmburger */}
         <div
           className="z-10 text-3xl harmburger sm:hidden"
           onClick={handleClick}
@@ -39,12 +51,6 @@ function Nav() {
             <FontAwesomeIcon icon={faTimes} />
           )}
         </div>
-
-        <Link href="/">
-          <a>
-            <Image src="/reddit.svg" width={123} height={70} />
-          </a>
-        </Link>
 
         <ul
           className={classNames(
@@ -60,16 +66,6 @@ function Nav() {
             <Guest setstate={setstate} />
           )}
         </ul>
-        {false && (
-          <span
-            // onClick={() => dispatch(logout())}
-            className={classNames("text-white hidden sm:block", {
-              "sm:text-blue-500 cursor-pointer": false,
-            })}
-          >
-            Logout
-          </span>
-        )}
       </nav>
     </header>
   );
