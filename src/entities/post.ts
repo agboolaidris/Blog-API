@@ -4,6 +4,7 @@ import {
   ManyToOne,
   BeforeInsert,
   OneToMany,
+  AfterLoad,
 } from "typeorm";
 
 import slugify from "slugify";
@@ -35,8 +36,17 @@ export class Post extends Entity {
   @Column({ type: "varchar" })
   subName: string;
 
+  @Column()
+  username: string;
+
   @OneToMany(() => Comment, (comment) => comment.post, { onDelete: "CASCADE" })
   comment: Comment[];
+
+  protected url: string;
+  @AfterLoad()
+  CreateField() {
+    this.url = `/r/${this.subName}/${this.identifier}/${this.slug}`;
+  }
 
   @ManyToOne(() => User, (user) => user.post)
   user: User;

@@ -9,13 +9,11 @@ export default function Home() {
         <title>Reddit:Font page of the Internet</title>
         <meta name="description" content="this is the home age" />
       </Head>
-      <div className="flex p-3 wrapper">
-        <div className="flex-1 bg-red-500">
+      <div className="flex p-3 mx-auto mt-5 sm:p-0 wrapper ">
+        <div className="flex-auto min-h-150px ">
           <Feed />
         </div>
-        <div className="hidden sm:block sm:flex-auto sm:bg-yellow-400">
-          SIDE BAR
-        </div>
+        <div className="hidden bg-gray-500 md:block sm:w-72 ">SIDE BAR</div>
       </div>
     </>
   );

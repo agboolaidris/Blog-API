@@ -35,6 +35,7 @@ module.exports = {
         "screen-70": "70vh",
         "screen-80": "80vh",
         "screen-90": "90vh",
+        "150px": "150px",
       }),
     },
   },
