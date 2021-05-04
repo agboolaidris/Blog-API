@@ -1,7 +1,13 @@
 import { IsEmail, Length } from "class-validator";
 import bcrypt from "bcrypt";
 import { Exclude } from "class-transformer";
-import { Entity as TOEntity, Column, BeforeInsert, OneToMany } from "typeorm";
+import {
+  Entity as TOEntity,
+  Column,
+  BeforeInsert,
+  OneToMany,
+  Index,
+} from "typeorm";
 
 import Entity from "./entity";
 import { Post } from "./post";
@@ -15,11 +21,13 @@ export class User extends Entity {
   }
 
   @Length(3, 20)
-  @Column({ type: "varchar" })
+  @Index()
+  @Column({ type: "varchar", name: "username", unique: true })
   username: string;
 
+  @Index()
   @IsEmail()
-  @Column({ type: "varchar" })
+  @Column({ type: "varchar", name: "email" })
   email: string;
 
   @Exclude()

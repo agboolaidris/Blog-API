@@ -4,6 +4,7 @@ import {
   ManyToOne,
   BeforeInsert,
   Index,
+  JoinColumn,
 } from "typeorm";
 
 import Entity from "./entity";
@@ -32,6 +33,7 @@ export class Comment extends Entity {
   post: Post;
 
   @ManyToOne(() => User, { nullable: false })
+  @JoinColumn({ name: "username", referencedColumnName: "username" })
   user: User;
 
   @BeforeInsert()

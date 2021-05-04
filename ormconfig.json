@@ -5,7 +5,7 @@
   "username": "root",
   "password": "@agboola_@123",
   "database": "reddit",
-  "synchronize": true,
+  "synchronize": false,
   "logging": true,
   "entities": ["src/entities/**/*.ts"],
   "migrations": ["src/migrations/**/*.ts"],

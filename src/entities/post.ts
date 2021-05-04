@@ -5,6 +5,7 @@ import {
   BeforeInsert,
   OneToMany,
   AfterLoad,
+  JoinColumn,
 } from "typeorm";
 
 import slugify from "slugify";
@@ -13,6 +14,7 @@ import { User } from "./User";
 import { makeId } from "../utils/helper";
 import { Sub } from "./sub";
 import { Comment } from "./comment";
+import { Expose } from "class-transformer";
 
 @TOEntity("posts")
 export class Post extends Entity {
@@ -36,20 +38,25 @@ export class Post extends Entity {
   @Column({ type: "varchar" })
   subName: string;
 
-  @Column()
+  @Column({ type: "varchar" })
   username: string;
 
-  @OneToMany(() => Comment, (comment) => comment.post, { onDelete: "CASCADE" })
-  comment: Comment[];
+  // protected url: string;
+  // @AfterLoad()
+  // CreateField() {
+  //   this.url = `/r/${this.subName}/${this.identifier}/${this.slug}`;
+  // }
 
-  protected url: string;
-  @AfterLoad()
-  CreateField() {
-    this.url = `/r/${this.subName}/${this.identifier}/${this.slug}`;
+  @Expose() get url(): string {
+    return `/r/${this.subName}/${this.identifier}/${this.slug}`;
   }
 
   @ManyToOne(() => User, (user) => user.post)
+  @JoinColumn([{ referencedColumnName: "username", name: "username" }])
   user: User;
+
+  @OneToMany(() => Comment, (comment) => comment.post, { onDelete: "CASCADE" })
+  comment: Comment[];
 
   @ManyToOne(() => Sub, (sub) => sub.post)
   sub: Sub;

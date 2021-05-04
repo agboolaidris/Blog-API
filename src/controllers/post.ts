@@ -28,7 +28,6 @@ export const fetchPosts = async (req, res) => {
   try {
     const posts = await Post.find({
       order: { createdAt: "DESC" },
-      relations: ["sub"],
     });
     res.json(posts);
   } catch (error) {
@@ -60,7 +59,6 @@ export const commentPost = async (req, res) => {
       body,
       user: res.locals.user,
       post,
-      username: res.locals.user.username,
     });
     await comment.save();
 
