@@ -8,6 +8,7 @@ import cors from "cors";
 import authRoute from "./routes/auth";
 import postRoute from "./routes/post";
 import subRoute from "./routes/sub";
+import voteRoute from "./routes/vote";
 
 dotenv.config();
 
@@ -34,6 +35,7 @@ app.use(
 app.use("/api/auth", authRoute);
 app.use("/api/post", postRoute);
 app.use("/api/sub", subRoute);
+app.use("/api/vote", voteRoute);
 
 app.listen(PORT, async () => {
   console.log(`app is listen on port ${PORT}!`);

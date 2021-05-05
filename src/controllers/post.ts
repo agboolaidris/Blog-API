@@ -28,6 +28,7 @@ export const fetchPosts = async (req, res) => {
   try {
     const posts = await Post.find({
       order: { createdAt: "DESC" },
+      relations: ["comments", "votes"],
     });
     res.json(posts);
   } catch (error) {
@@ -52,6 +53,8 @@ export const fetchPost = async (req, res) => {
 export const commentPost = async (req, res) => {
   const { identifier, slug } = req.params;
   const { body } = req.body;
+
+  if (!body) return res.status(400).json({ body: "body most not be empty" });
   try {
     const post = await Post.findOneOrFail({ slug, identifier });
 

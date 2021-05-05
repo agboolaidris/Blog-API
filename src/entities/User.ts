@@ -12,6 +12,7 @@ import {
 import Entity from "./entity";
 import { Post } from "./post";
 import { Comment } from "./comment";
+import { Vote } from "./vote";
 
 @TOEntity("users")
 export class User extends Entity {
@@ -22,7 +23,7 @@ export class User extends Entity {
 
   @Length(3, 20)
   @Index()
-  @Column({ type: "varchar", name: "username", unique: true })
+  @Column({ type: "varchar", name: "username" })
   username: string;
 
   @Index()
@@ -36,10 +37,13 @@ export class User extends Entity {
   password: string;
 
   @OneToMany(() => Post, (post) => post.user, { onDelete: "CASCADE" })
-  post: Post[];
+  posts: Post[];
+
+  @OneToMany(() => Vote, (vote) => vote.user, { onDelete: "CASCADE" })
+  votes: Vote[];
 
   @OneToMany(() => Comment, (comment) => comment.user, { onDelete: "CASCADE" })
-  comment: Comment[];
+  comments: Comment[];
 
   @BeforeInsert()
   async hashpassword() {

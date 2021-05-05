@@ -4,7 +4,6 @@ import {
   ManyToOne,
   BeforeInsert,
   OneToMany,
-  AfterLoad,
   JoinColumn,
 } from "typeorm";
 
@@ -14,7 +13,8 @@ import { User } from "./User";
 import { makeId } from "../utils/helper";
 import { Sub } from "./sub";
 import { Comment } from "./comment";
-import { Expose } from "class-transformer";
+import { Exclude, Expose } from "class-transformer";
+import { Vote } from "./vote";
 
 @TOEntity("posts")
 export class Post extends Entity {
@@ -47,16 +47,34 @@ export class Post extends Entity {
   //   this.url = `/r/${this.subName}/${this.identifier}/${this.slug}`;
   // }
 
+  protected UserVote: number;
+  setUserVote(user: User) {
+    const index = this.votes?.findIndex((v) => v.username === user.username);
+    this.UserVote = index > -1 ? this.votes[index].value : 0;
+  }
+
   @Expose() get url(): string {
     return `/r/${this.subName}/${this.identifier}/${this.slug}`;
   }
 
-  @ManyToOne(() => User, (user) => user.post)
+  @Expose() get commentCount(): number {
+    return this.comments?.length;
+  }
+
+  @Expose() get voteScore(): number {
+    return this.votes?.reduce((prev, curr) => prev + (curr.value || 0), 0);
+  }
+
+  @ManyToOne(() => User, (user) => user.posts)
   @JoinColumn([{ referencedColumnName: "username", name: "username" }])
   user: User;
 
   @OneToMany(() => Comment, (comment) => comment.post, { onDelete: "CASCADE" })
-  comment: Comment[];
+  comments: Comment[];
+
+  @Exclude()
+  @OneToMany(() => Vote, (vote) => vote.post, { onDelete: "CASCADE" })
+  votes: Vote[];
 
   @ManyToOne(() => Sub, (sub) => sub.post)
   sub: Sub;
