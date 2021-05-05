@@ -11,6 +11,7 @@ import {
   faShare,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Vote from "../../functions/Home/Vote";
 
 dayjs.extend(relativeTime);
 
@@ -19,13 +20,12 @@ const Card = ({ post }) => {
     <div className="flex mt-3 overflow-hidden border border-gray-200 rounded-md sm:mx-5 hover:border-gray-400">
       {/* vote section */}
       <div className="flex flex-col justify-around px-5 bg-gray-100">
-        <span className="font-extrabold text-gray-600 transition-all duration-100 hover:text-red-600">
-          <FontAwesomeIcon icon={faArrowUp} />
-        </span>
-        <span>10</span>
-        <span className="font-extrabold text-gray-600 transition-all duration-100 hover:text-blue-600">
-          <FontAwesomeIcon icon={faArrowDown} />
-        </span>
+        <Vote
+          voteScore={post?.voteScore}
+          identifier={post?.identifier}
+          slug={post?.slug}
+          Uservote={post?.UserVote}
+        />
       </div>
 
       {/* post section */}
@@ -69,7 +69,7 @@ const Card = ({ post }) => {
           <Link href={post?.url}>
             <div className="flex items-center p-px rounded cursor-pointer hover:bg-gray-300">
               <FontAwesomeIcon icon={faCommentAlt} />
-              <span className="ml-1">30k comment</span>
+              <span className="ml-1">{post?.commentCount} comment</span>
             </div>
           </Link>
           <Link href={post?.url}>

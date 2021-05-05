@@ -11,3 +11,14 @@ export const fetchPost = () => {
     }
   };
 };
+
+export const vote = (state) => {
+  return async (dispatch) => {
+    try {
+      const data = await axios.post("/vote", state);
+      console.log(data);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+};

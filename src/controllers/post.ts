@@ -28,8 +28,13 @@ export const fetchPosts = async (req, res) => {
   try {
     const posts = await Post.find({
       order: { createdAt: "DESC" },
-      relations: ["comments", "votes"],
+      relations: ["comments", "comments.votes", "votes", "sub"],
     });
+
+    if (res.locals.user) {
+      posts.forEach((post) => post.setUserVote(res.locals.user));
+    }
+
     res.json(posts);
   } catch (error) {
     res.status(500).json({ error: error.message });

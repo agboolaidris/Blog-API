@@ -1,20 +1,18 @@
 import jwt from "jsonwebtoken";
 import { User } from "../entities/User";
 
-const authMiddleware = async (req, res, next) => {
+const userMiddleware = async (req, res, next) => {
   try {
     const cookie = req.cookies["access-token"];
 
-    if (!cookie) res.status(401).json({ error: "unathorize" });
+    if (!cookie) return next();
 
     const { username }: any = jwt.verify(cookie, process.env.JWT_SECRET);
 
-    if (!username)
-      return res.status(400).json({ error: "unathorized,user verified fail" });
+    if (!username) return next();
 
     const user = await User.findOne({ username });
-    if (!user)
-      return res.status(400).json({ error: "unathorized,user verified fail" });
+    if (!user) next();
 
     res.locals.user = user;
 
@@ -24,4 +22,4 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-export default authMiddleware;
+export default userMiddleware;

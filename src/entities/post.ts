@@ -69,6 +69,7 @@ export class Post extends Entity {
   @JoinColumn([{ referencedColumnName: "username", name: "username" }])
   user: User;
 
+  @Exclude()
   @OneToMany(() => Comment, (comment) => comment.post, { onDelete: "CASCADE" })
   comments: Comment[];
 
