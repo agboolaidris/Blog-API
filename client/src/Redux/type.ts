@@ -14,3 +14,4 @@ export const AUTH_LOADING = "AUTH-LOADING";
 
 //post
 export const FETCH_POST = "FETCH-POST";
+export const FETCH_SUBPOST = "FETCH-SUBPOST";

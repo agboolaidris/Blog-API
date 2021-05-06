@@ -33,16 +33,15 @@ const Card = ({ post }) => {
       <div className="w-full px-2 py-1 text-xs sm:px-3 bg-gray-50">
         <div className="flex ">
           <Link href={`/r/${post?.subName}`}>
-            <>
+            <a className="flex ml-2 text-xs cursor-pointer hover:text-red-600">
               <img
                 src="https://uxwing.com/wp-content/themes/uxwing/download/12-people-gesture/avatar.png"
                 width="15"
                 height="15"
                 className="cursor-pointer "
               />
-
-              <a className="ml-2 text-xs cursor-pointer hover:text-red-600">{`r/${post?.subName}`}</a>
-            </>
+              <span className="ml-2 ">{`r/${post?.subName}`}</span>
+            </a>
           </Link>
 
           <div className="flex ml-2 text-gray-500">

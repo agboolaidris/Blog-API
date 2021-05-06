@@ -12,6 +12,19 @@ export const fetchPost = () => {
   };
 };
 
+export const fetchSubPost = (path: any, router: any) => {
+  console.log(path);
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`/sub/${path}`);
+
+      dispatch({ type: type.FETCH_SUBPOST, payload: data });
+    } catch (error) {
+      router.push("/");
+    }
+  };
+};
+
 export const vote = (state) => {
   return async (dispatch) => {
     try {

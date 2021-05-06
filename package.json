@@ -38,6 +38,6 @@
     "server": "nodemon --exec ts-node src/server.ts",
     "client": "cd client && npm run dev",
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
-    "dev": "concurrently \"npm run server\"  \"npm run client\" "
+    "dev": "concurrently \"npm run server\"  \"npm run client\" -n server,client "
   }
 }

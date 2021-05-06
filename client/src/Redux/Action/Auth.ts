@@ -20,7 +20,7 @@ export const register = (state: Object, router: any) => {
     try {
       const { data } = await axios.post("auth/register", state);
 
-      dispatch({ type: type.REGISTER_SUCCESS, payload: data });
+      dispatch({ type: type.REGISTER_SUCCESS });
       router.push("/signin");
     } catch (error) {
       console.log(error.response);
@@ -53,12 +53,11 @@ export const logout = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get("/auth/logout");
-      dispatch({ type: type.LOGOUT_SUCCESS, payload: data });
+      dispatch({ type: type.LOGOUT_SUCCESS });
       window.location.reload();
     } catch (error) {
       dispatch({
         type: type.LOGOUT_ERROR,
-        payload: error.response.data,
       });
     }
   };

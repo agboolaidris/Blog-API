@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { AppProps } from "next/dist/next-server/lib/router/router";
 import { Provider, useDispatch } from "react-redux";
 import { createWrapper } from "next-redux-wrapper";
+import { SWRConfig } from "swr";
 
 import Layout from "../layout";
 import store from "../Redux";
