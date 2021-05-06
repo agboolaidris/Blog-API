@@ -3,8 +3,10 @@ import Head from "next/head";
 
 import Link from "../components/shared/Link";
 import SignupForm from "../functions/Auth/Signup";
+import { publicRoute } from "../helper/route";
 
 function Register() {
+  publicRoute();
   return (
     <>
       <Head>

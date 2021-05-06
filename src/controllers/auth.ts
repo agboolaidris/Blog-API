@@ -42,7 +42,7 @@ export const login = async (req, res) => {
       })
     );
 
-    res.json({ user: req.user });
+    res.json({ user: res.locals.user });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -62,6 +62,19 @@ export const logout = async (req, res) => {
     );
 
     res.json({ success: true });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const isMe = async (req, res) => {
+  try {
+    console.log(res.locals.user);
+    const user = await User.findOneOrFail({
+      username: res.locals.user.username,
+    });
+
+    res.json(user);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

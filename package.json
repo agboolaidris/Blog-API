@@ -19,6 +19,7 @@
     "bcrypt": "^5.0.1",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
+    "concurrently": "^6.0.2",
     "cookie": "^0.4.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
@@ -34,7 +35,9 @@
   },
   "scripts": {
     "start": "ts-node src/server.ts",
-    "dev": "nodemon --exec ts-node src/server.ts",
-    "typeorm": "ts-node ./node_modules/typeorm/cli.js"
+    "server": "nodemon --exec ts-node src/server.ts",
+    "client": "cd client && npm run dev",
+    "typeorm": "ts-node ./node_modules/typeorm/cli.js",
+    "dev": "concurrently \"npm run server\"  \"npm run client\" "
   }
 }

@@ -4,6 +4,7 @@ const initialState = {
   isAuthenticated: false,
   error: {},
   type: "",
+  user: {},
 };
 
 const Reducer = (state = initialState, action) => {
@@ -14,28 +15,40 @@ const Reducer = (state = initialState, action) => {
         isLoading: true,
       };
       break;
-    case type.AUTH_SUCCESS:
+
+    case type.REGISTER_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        msg: action.payload,
-      };
-    case type.LOGIN_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        isAuthenticated: true,
-        msg: action.payload,
+        error: {},
       };
 
-    case type.AUTH_ERROR:
-    case type.LOGOUT_SUCCESS:
+    case type.REGISTER_ERROR:
+    case type.LOGIN_ERROR:
       return {
         ...state,
         isLoading: false,
         error: action.payload,
         type: action.name,
+      };
+
+    case type.LOGIN_SUCCESS:
+    case type.ME_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isAuthenticated: true,
+        user: action.payload,
+      };
+
+    case type.LOGOUT_SUCCESS:
+    case type.ME_ERROR:
+      return {
+        isLoading: false,
         isAuthenticated: false,
+        error: {},
+        type: "",
+        user: {},
       };
 
     default:

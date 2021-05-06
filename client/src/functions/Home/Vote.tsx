@@ -28,7 +28,7 @@ const Vote: React.FC<VoteProps> = ({
         icon={faArrowUp}
         style={
           Uservote === 1
-            ? "hover:red-blue-600 text-red-600"
+            ? "hover:red-red-600 text-red-600"
             : "hover:text-blue-600 text-gray-600"
         }
         handleClick={() => handleVote(1)}

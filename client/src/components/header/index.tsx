@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
+import { RootStateOrAny, useSelector } from "react-redux";
 import Guest from "./Guest";
 import Client from "./Client";
 import classNames from "classnames";
@@ -15,7 +16,6 @@ function Nav() {
   const routeNotIncluded = notIncludeRoute.includes(pathname);
 
   const [state, setstate] = useState(false);
-
   const handleClick = () => {
     if (state) {
       setstate(false);
@@ -23,6 +23,10 @@ function Nav() {
       setstate(true);
     }
   };
+
+  const isAuthenticated = useSelector(
+    (state: RootStateOrAny) => state.Auth.isAuthenticated
+  );
 
   return (
     <header
@@ -52,13 +56,14 @@ function Nav() {
           )}
         </div>
 
+        {/* navlink */}
         <ul
           className={classNames(
             "fixed sm:relative w-screen sm:w-auto min-h-screen-40  sm:min-h-0 top-10vh sm:top-0 transition duration-1000 left-0  right-0 transform  sm:transform-none translate-x-0 bg-gray-200 sm:bg-transparent flex flex-col sm:flex-row justify-center ",
             { "-translate-x-full": !state }
           )}
         >
-          {false ? (
+          {isAuthenticated ? (
             <>
               <Client setstate={setstate} />
             </>

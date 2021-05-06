@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
 import SigninForm from "../functions/Auth/Signin";
 import Link from "../components/shared/Link";
+import { publicRoute } from "../helper/route";
+
 function Signin() {
+  publicRoute();
   return (
     <>
       <Head>

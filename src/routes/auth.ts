@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { login, register, logout } from "../controllers/auth";
+import { login, register, logout, isMe } from "../controllers/auth";
 import { registerValidator, loginValidator } from "../validators/auth";
 import trim from "../middleware/trim";
 import AuthMiddleware from "../middleware/auth";
@@ -13,8 +13,6 @@ Route.post("/login", [trim, loginValidator], login);
 
 Route.get("/logout", [AuthMiddleware], logout);
 
-Route.get("/test", [AuthMiddleware], (req, res) => {
-  res.json({ msg: "hhhh" });
-});
+Route.get("/me", [AuthMiddleware], isMe);
 
 export default Route;
