@@ -2,7 +2,7 @@ import * as type from "../type";
 
 const initialState = {
   posts: [],
-  subPosts: [],
+  sub: {},
 };
 
 const Reducer = (state = initialState, action) => {
@@ -17,7 +17,7 @@ const Reducer = (state = initialState, action) => {
     case type.FETCH_SUBPOST:
       return {
         ...state,
-        subPosts: action.payload.sub.post,
+        sub: action.payload,
       };
       break;
 

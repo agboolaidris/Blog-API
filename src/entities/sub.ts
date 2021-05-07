@@ -8,6 +8,7 @@ import {
 import Entity from "./entity";
 import { User } from "./User";
 import { Post } from "./post";
+import { Exclude, Expose } from "class-transformer";
 
 @TOEntity("subs")
 export class Sub extends Entity {
@@ -26,9 +27,11 @@ export class Sub extends Entity {
   @Column({ type: "varchar", nullable: true })
   description: string;
 
+  @Exclude()
   @Column({ type: "varchar", nullable: true })
   imageUrn: string;
 
+  @Exclude()
   @Column({ type: "varchar", nullable: true })
   bannerUrn: string;
 
@@ -38,4 +41,18 @@ export class Sub extends Entity {
 
   @OneToMany(() => Post, (post) => post.sub)
   posts: Post[];
+
+  @Expose()
+  imageUrl() {
+    return this.imageUrn
+      ? `${process.env.APP_URL}/images/${this.imageUrn}`
+      : "http://www.gravatar.com/avatar/?d=mp";
+  }
+
+  @Expose()
+  bannerUrl() {
+    return this.bannerUrn
+      ? `${process.env.APP_URL}/images/${this.bannerUrn}`
+      : undefined;
+  }
 }

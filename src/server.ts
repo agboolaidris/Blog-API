@@ -33,7 +33,7 @@ app.use(
 );
 
 //static files
-app.use(express.static(path.join(__dirname, "../public/images")));
+app.use(express.static(path.join(__dirname, "../public")));
 
 //setup route
 app.use("/api/auth", authRoute);

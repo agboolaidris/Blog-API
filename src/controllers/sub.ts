@@ -66,3 +66,13 @@ export const subImage = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const topSub = async (req, res) => {
+  try {
+    const topSub = await Sub.find();
+
+    res.json(topSub);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import * as type from "../type";
 
 export const fetchPost = () => {
@@ -13,7 +14,6 @@ export const fetchPost = () => {
 };
 
 export const fetchSubPost = (path: any, router: any) => {
-  console.log(path);
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`/sub/${path}`);
@@ -21,6 +21,20 @@ export const fetchSubPost = (path: any, router: any) => {
       dispatch({ type: type.FETCH_SUBPOST, payload: data });
     } catch (error) {
       router.push("/");
+    }
+  };
+};
+
+export const uploadSubImage = (form: object, name: string) => {
+  return async (dispatch) => {
+    console.log("hhh");
+    try {
+      const { data } = await axios.post(`/sub/${name}/image`, form);
+      console.log(data);
+
+      //dispatch({ type: type.FETCH_SUBPOST, payload: data });
+    } catch (error) {
+      console.log(error.response);
     }
   };
 };

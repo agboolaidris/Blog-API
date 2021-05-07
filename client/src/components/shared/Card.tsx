@@ -17,7 +17,7 @@ dayjs.extend(relativeTime);
 
 const Card = ({ post }) => {
   return (
-    <div className="flex mt-3 overflow-hidden border border-gray-200 rounded-md sm:mx-5 hover:border-gray-400">
+    <div className="flex mt-3 overflow-hidden border border-gray-200 rounded-md hover:border-gray-400">
       {/* vote section */}
       <div className="flex flex-col justify-around px-5 bg-gray-100">
         <Vote
