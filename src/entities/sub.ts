@@ -1,4 +1,10 @@
-import { Entity as TOEntity, Column, OneToMany, ManyToOne } from "typeorm";
+import {
+  Entity as TOEntity,
+  Column,
+  OneToMany,
+  ManyToOne,
+  JoinColumn,
+} from "typeorm";
 import Entity from "./entity";
 import { User } from "./User";
 import { Post } from "./post";
@@ -14,19 +20,22 @@ export class Sub extends Entity {
 
   @Column({ type: "varchar" })
   title: string;
+  @Column()
+  username: string;
 
   @Column({ type: "varchar", nullable: true })
   description: string;
 
   @Column({ type: "varchar", nullable: true })
-  imageUrl: string;
+  imageUrn: string;
 
   @Column({ type: "varchar", nullable: true })
-  bannerUrl: string;
+  bannerUrn: string;
 
   @ManyToOne(() => User)
+  @JoinColumn({ name: "username", referencedColumnName: "username" })
   user: User;
 
   @OneToMany(() => Post, (post) => post.sub)
-  post: Post[];
+  posts: Post[];
 }

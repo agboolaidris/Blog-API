@@ -19,7 +19,7 @@ export const loginValidator = async (req, res, next) => {
     if (!passwordMatch)
       return res.status(400).json({ password: "email or password not match" });
 
-    req.user = user;
+    res.locals.user = user;
     next();
   } catch (error) {
     res.status(401).json({ msg: error.message });

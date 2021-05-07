@@ -1,5 +1,6 @@
 import "reflect-metadata";
 import { createConnection } from "typeorm";
+import path from "path";
 import express from "express";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
@@ -30,6 +31,9 @@ app.use(
     optionsSuccessStatus: 200,
   })
 );
+
+//static files
+app.use(express.static(path.join(__dirname, "../public/images")));
 
 //setup route
 app.use("/api/auth", authRoute);

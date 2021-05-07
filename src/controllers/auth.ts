@@ -27,7 +27,7 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const token = jwt.sign(
-      { username: req.user.username },
+      { username: res.locals.user.username },
       process.env.JWT_SECRET
     );
 

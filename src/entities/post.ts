@@ -77,7 +77,7 @@ export class Post extends Entity {
   @OneToMany(() => Vote, (vote) => vote.post, { onDelete: "CASCADE" })
   votes: Vote[];
 
-  @ManyToOne(() => Sub, (sub) => sub.post)
+  @ManyToOne(() => Sub, (sub) => sub.posts)
   sub: Sub;
 
   @BeforeInsert()

@@ -1,3 +1,4 @@
+import fs from "fs";
 import { Post } from "../entities/post";
 import { Sub } from "../entities/sub";
 
@@ -19,7 +20,7 @@ export const createSub = async (req, res) => {
 
 export const getSub = async (req, res) => {
   const { name } = req.params;
-  console.log(name);
+
   try {
     const sub: Sub = await Sub.findOneOrFail({ name });
     const posts = await Post.find({
@@ -28,13 +29,39 @@ export const getSub = async (req, res) => {
       relations: ["comments", "votes"],
     });
 
-    sub.post = posts;
+    sub.posts = posts;
 
     if (res.locals.user) {
-      sub.post.forEach((p) => p.setUserVote(res.locals.user));
+      sub.posts.forEach((p) => p.setUserVote(res.locals.user));
     }
 
     res.json({ sub });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const subImage = async (req, res) => {
+  try {
+    const sub: Sub = res.locals.sub;
+
+    let oldUrn: string = "";
+
+    if (req.body.type === "image") {
+      oldUrn = sub.imageUrn ?? "";
+      sub.imageUrn = req.file.path.split("images")[1];
+    } else if (req.body.type === "banner") {
+      oldUrn = sub.bannerUrn ?? "";
+      sub.bannerUrn = req.file.path.split("images")[1];
+    }
+
+    await sub.save();
+
+    if (oldUrn !== "") {
+      fs.unlinkSync(`public/images/${oldUrn}`);
+    }
+
+    res.json(sub);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
