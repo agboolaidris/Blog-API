@@ -71,7 +71,8 @@ export const subImage = async (req, res) => {
 export const allSub = async (req, res) => {
   try {
     const subs = await Sub.find({ order: { createdAt: "DESC" } });
-    const response = subs.filter((sub, index) => index < 3);
+
+    const response = subs.slice(0, 5);
 
     res.json(response);
   } catch (error) {

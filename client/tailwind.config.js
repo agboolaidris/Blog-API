@@ -47,6 +47,7 @@ module.exports = {
       minHeight: ["hover"],
       position: ["hover", "focus"],
       inset: ["hover", "focus"],
+      borderWidth: ["hover", "focus", "last"],
     },
   },
 

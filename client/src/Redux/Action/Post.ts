@@ -2,7 +2,7 @@ import axios from "axios";
 
 import * as type from "../type";
 
-export const fetchPost = () => {
+export const fetchPosts = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get("/post");
@@ -50,7 +50,7 @@ export const vote = (state) => {
   };
 };
 
-export const fetchTopSub = (path: any, router: any) => {
+export const fetchTopSub = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`/sub`);

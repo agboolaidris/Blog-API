@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
 import { RootStateOrAny, useSelector, useDispatch } from "react-redux";
 import Card from "../../components/shared/Card";
-import { fetchPost } from "../../Redux/Action/Post";
+import { fetchPosts } from "../../Redux/Action/Post";
 
 function Feed() {
   const dispatch = useDispatch();
   const posts = useSelector((state: RootStateOrAny) => state.Post.posts);
 
   useEffect(() => {
-    dispatch(fetchPost());
+    dispatch(fetchPosts());
   }, [dispatch]);
+
   return (
     <>
       {posts?.map((post: void, index) => (

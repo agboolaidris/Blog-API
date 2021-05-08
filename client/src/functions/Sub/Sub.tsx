@@ -5,7 +5,7 @@ import { fetchSubPost } from "../../Redux/Action/Post";
 import Card from "../../components/shared/Card";
 import { Sub as SubType } from "../../helper/types";
 
-function Sub() {
+function Sub({ context }) {
   const router = useRouter();
 
   //local state
@@ -20,8 +20,8 @@ function Sub() {
 
   // functions
   useEffect(() => {
-    dispatch(fetchSubPost(sub, router));
-  }, [dispatch]);
+    sub && dispatch(fetchSubPost(sub, router));
+  }, [sub]);
 
   return (
     <>

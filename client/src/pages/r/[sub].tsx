@@ -22,7 +22,7 @@ function Sub() {
             <SubPost />
           </div>
 
-          <div className="hidden mt-3 w-60 sm:block min-h-screen-10">
+          <div className="hidden mt-3 w-72 sm:block min-h-screen-10">
             <Sidebar />
           </div>
         </div>

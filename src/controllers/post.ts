@@ -44,11 +44,14 @@ export const fetchPosts = async (req, res) => {
 export const fetchPost = async (req, res) => {
   const { identifier, slug } = req.params;
   try {
-    console.log(slug);
-    const post = await Post.findOneOrFail(
+    const post: Post = await Post.findOneOrFail(
       { slug, identifier },
       { relations: ["sub", "comment"] }
     );
+
+    if (res.locals.user) {
+      post.setUserVote(res.locals.user);
+    }
     res.json(post);
   } catch (error) {
     res.status(500).json({ error: error.message });

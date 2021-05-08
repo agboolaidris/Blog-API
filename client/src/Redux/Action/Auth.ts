@@ -38,7 +38,7 @@ export const login = (state: object, router: any) => {
     try {
       const { data } = await axios.post("/auth/login", state);
       dispatch({ type: type.LOGIN_SUCCESS, payload: data });
-      router.push("/");
+      router.back("/");
     } catch (error) {
       dispatch({
         type: type.LOGIN_ERROR,
