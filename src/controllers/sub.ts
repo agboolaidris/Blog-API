@@ -1,4 +1,5 @@
 import fs from "fs";
+import { getConnection } from "typeorm";
 import { Post } from "../entities/post";
 import { Sub } from "../entities/sub";
 
@@ -67,11 +68,12 @@ export const subImage = async (req, res) => {
   }
 };
 
-export const topSub = async (req, res) => {
+export const allSub = async (req, res) => {
   try {
-    const topSub = await Sub.find();
+    const subs = await Sub.find({ order: { createdAt: "DESC" } });
+    const response = subs.filter((sub, index) => index < 3);
 
-    res.json(topSub);
+    res.json(response);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

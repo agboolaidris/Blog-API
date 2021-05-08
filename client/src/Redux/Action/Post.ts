@@ -49,3 +49,16 @@ export const vote = (state) => {
     }
   };
 };
+
+export const fetchTopSub = (path: any, router: any) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`/sub`);
+      console.log(data);
+
+      dispatch({ type: type.FETCH_TOPSUB, payload: data });
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+};

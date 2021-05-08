@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { createSub, getSub, subImage, topSub } from "../controllers/sub";
+import { createSub, getSub, subImage, allSub } from "../controllers/sub";
 import trim from "../middleware/trim";
 import AuthMiddleware from "../middleware/auth";
 import { subValidator } from "../validators/sub";
@@ -17,6 +17,6 @@ Route.post(
   subImage
 );
 Route.get("/:name", [userMiddleware], getSub);
-Route.get("/", topSub);
+Route.get("/", allSub);
 
 export default Route;

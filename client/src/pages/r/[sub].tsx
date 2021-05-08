@@ -2,6 +2,7 @@ import Head from "next/head";
 import React from "react";
 import { useSelector, RootStateOrAny } from "react-redux";
 import Banner from "../../functions/Sub/Banner";
+import Sidebar from "../../functions/Sub/Sidebar";
 import SubPost from "../../functions/Sub/Sub";
 import { Sub as SubType } from "../../helper/types";
 
@@ -16,8 +17,14 @@ function Sub() {
       </Head>
       <>
         <Banner />
-        <div className="px-3 md:px-5 wrapper">
-          <SubPost />
+        <div className="flex px-3 md:px-5 wrapper ">
+          <div className="px-5">
+            <SubPost />
+          </div>
+
+          <div className="hidden mt-3 w-60 sm:block min-h-screen-10">
+            <Sidebar />
+          </div>
         </div>
       </>
     </div>

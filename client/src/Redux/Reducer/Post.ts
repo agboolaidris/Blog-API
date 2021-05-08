@@ -3,6 +3,7 @@ import * as type from "../type";
 const initialState = {
   posts: [],
   sub: {},
+  topSub: [],
 };
 
 const Reducer = (state = initialState, action) => {
@@ -18,6 +19,13 @@ const Reducer = (state = initialState, action) => {
       return {
         ...state,
         sub: action.payload,
+      };
+      break;
+
+    case type.FETCH_TOPSUB:
+      return {
+        ...state,
+        topSub: action.payload,
       };
       break;
 
