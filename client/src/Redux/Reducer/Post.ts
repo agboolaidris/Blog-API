@@ -4,14 +4,22 @@ const initialState = {
   posts: [],
   sub: {},
   topSub: [],
+  post: {},
 };
 
 const Reducer = (state = initialState, action) => {
   switch (action.type) {
-    case type.FETCH_POST:
+    case type.FETCH_POSTS:
       return {
         ...state,
         posts: action.payload,
+      };
+      break;
+
+    case type.FETCH_POST:
+      return {
+        ...state,
+        post: action.payload,
       };
       break;
 

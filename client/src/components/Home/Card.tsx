@@ -63,19 +63,19 @@ const Card = ({ post }) => {
         {post.body && <p className="text-sm text-gray-500">{post.body}</p>}
 
         <div className="flex mt-2 text-gray-400">
-          <Link href={post?.url}>
+          <Link href={`${post?.url}`}>
             <div className="flex items-center p-px rounded cursor-pointer hover:bg-gray-300">
               <FontAwesomeIcon icon={faCommentAlt} />
               <span className="ml-1">{post?.commentCount} comment</span>
             </div>
           </Link>
-          <Link href={post?.url}>
+          <Link href={`${post?.url}`}>
             <div className="flex items-center p-px ml-2 rounded cursor-pointer hover:bg-gray-300">
               <FontAwesomeIcon icon={faShare} />
               <span className="ml-1">Share</span>
             </div>
           </Link>
-          <Link href={post?.url}>
+          <Link href={`${post?.url}`}>
             <div className="flex items-center p-px ml-2 rounded cursor-pointer hover:bg-gray-300">
               <FontAwesomeIcon icon={faBookmark} />
               <span className="ml-1">Save</span>

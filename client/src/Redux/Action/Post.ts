@@ -1,4 +1,5 @@
 import axios from "axios";
+import { NextRouter } from "next/router";
 
 import * as type from "../type";
 
@@ -6,8 +7,21 @@ export const fetchPosts = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get("/post");
+      dispatch({ type: type.FETCH_POSTS, payload: data });
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+};
+
+export const fetchPost = (slug: any, identifier: any, router: NextRouter) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`/post/${identifier}/${slug}`);
+
       dispatch({ type: type.FETCH_POST, payload: data });
     } catch (error) {
+      // console.log(error.response);
       console.log(error.response);
     }
   };

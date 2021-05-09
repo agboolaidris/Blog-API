@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { RootStateOrAny, useSelector, useDispatch } from "react-redux";
-import Card from "../../components/shared/Card";
+import Card from "../../components/Home/Card";
 import { fetchPosts } from "../../Redux/Action/Post";
 
 function Feed() {

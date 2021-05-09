@@ -13,6 +13,7 @@ export const LOGOUT_ERROR = "LOGOUT-ERROR";
 export const AUTH_LOADING = "AUTH-LOADING";
 
 //post
+export const FETCH_POSTS = "FETCH-POSTS";
 export const FETCH_POST = "FETCH-POST";
 export const FETCH_SUBPOST = "FETCH-SUBPOST";
 export const FETCH_TOPSUB = "FETCH-TOPSUB";

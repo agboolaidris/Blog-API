@@ -16,3 +16,19 @@ export interface Sub {
   imageUrl: string;
   bannerUrl?: string | undefined;
 }
+
+export interface Post {
+  createdAt: string;
+  updatedAt: string;
+  identifier: string;
+  slug: string;
+  title: string;
+  body?: string;
+  subName: string;
+  username: string;
+  sub: Sub;
+  UserVote: number;
+  url: string;
+  commentCount: number;
+  voteScore: number;
+}

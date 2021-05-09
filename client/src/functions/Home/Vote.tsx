@@ -1,7 +1,8 @@
 import React from "react";
+import { useRouter } from "next/router";
 import Arrow from "../../components/shared/Arrow";
 import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch } from "react-redux";
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { vote } from "../../Redux/Action/Post";
 
 interface VoteProps {
@@ -17,8 +18,18 @@ const Vote: React.FC<VoteProps> = ({
   Uservote,
   identifier,
 }) => {
+  const routers = useRouter();
+  const isAuthenticated = useSelector(
+    (state: RootStateOrAny) => state.Auth.isAuthenticated
+  );
   const dispatch = useDispatch();
   const handleVote = (value: number) => {
+    //if user not authenticated redirect to login page
+    if (!isAuthenticated) return routers.push("/signin");
+
+    //check if the value is equal to the previous value
+    if (value === Uservote) value = 0;
+
     dispatch(vote({ value, slug, identifier }));
   };
 

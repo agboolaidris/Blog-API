@@ -46,7 +46,7 @@ export const fetchPost = async (req, res) => {
   try {
     const post: Post = await Post.findOneOrFail(
       { slug, identifier },
-      { relations: ["sub", "comment"] }
+      { relations: ["sub", "comments", "votes", "comments.votes"] }
     );
 
     if (res.locals.user) {

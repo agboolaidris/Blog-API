@@ -1,6 +1,6 @@
 import React from "react";
-import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
-import SidebarComp from "../../components/Sub/Sidebar";
+import { useSelector, RootStateOrAny } from "react-redux";
+import SidebarComp from "../../components/shared/Sidebar";
 import { Sub } from "../../helper/types";
 
 function Sidebar() {

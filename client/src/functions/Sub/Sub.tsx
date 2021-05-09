@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { fetchSubPost } from "../../Redux/Action/Post";
-import Card from "../../components/shared/Card";
+import Card from "../../components/Home/Card";
 import { Sub as SubType } from "../../helper/types";
 
-function Sub({ context }) {
+function Sub() {
   const router = useRouter();
 
   //local state
