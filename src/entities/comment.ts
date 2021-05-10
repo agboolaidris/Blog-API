@@ -13,7 +13,7 @@ import { User } from "./User";
 import { makeId } from "../utils/helper";
 import { Post } from "./post";
 import { Vote } from "./vote";
-import { Exclude } from "class-transformer";
+import { Exclude, Expose } from "class-transformer";
 
 @TOEntity("comments")
 export class Comment extends Entity {
@@ -36,6 +36,10 @@ export class Comment extends Entity {
   setUserVote(user: User) {
     const index = this.votes?.findIndex((v) => v.username === user.username);
     this.UserVote = index > -1 ? this.votes[index].value : 0;
+  }
+
+  @Expose() get voteScore(): number {
+    return this.votes?.reduce((prev, curr) => prev + (curr.value || 0), 0);
   }
 
   @ManyToOne(() => Post, (post) => post.comments, { nullable: false })

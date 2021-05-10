@@ -32,3 +32,18 @@ export interface Post {
   commentCount: number;
   voteScore: number;
 }
+
+export interface Comment {
+  createdAt: string;
+  updatedAt: string;
+  identifier: string;
+  body: string;
+  username: string;
+  UserVote: number;
+  voteScore: number;
+}
+
+export interface PostComment {
+  post: Post;
+  comments: Comment[];
+}

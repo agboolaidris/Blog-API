@@ -46,13 +46,20 @@ export const fetchPost = async (req, res) => {
   try {
     const post: Post = await Post.findOneOrFail(
       { slug, identifier },
-      { relations: ["sub", "comments", "votes", "comments.votes"] }
+      { relations: ["comments", "comments.votes", "votes", "sub"] }
     );
+    const comments: Comment[] = await Comment.find({
+      where: { post },
+      order: { createdAt: "DESC" },
+      relations: ["votes"],
+    });
 
     if (res.locals.user) {
+      comments.forEach((comment) => comment.setUserVote(res.locals.user));
       post.setUserVote(res.locals.user);
     }
-    res.json(post);
+
+    res.json({ post, comments });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -74,6 +81,23 @@ export const commentPost = async (req, res) => {
     await comment.save();
 
     res.json(comment);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const fetchComment = async (req, res) => {
+  const { identifier, slug } = req.params;
+  try {
+    const post: Post = await Post.findOneOrFail(
+      { slug, identifier },
+      { relations: ["sub", "comments", "votes", "comments.votes"] }
+    );
+
+    if (res.locals.user) {
+      post.setUserVote(res.locals.user);
+    }
+    res.json(post);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
