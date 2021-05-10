@@ -5,9 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 interface Props {
   name: string;
   path: string;
-  onClick: () => void | null;
-  style: string | undefined;
-  icon: any | undefined;
+  onClick?: () => void | null;
+  style?: string | undefined;
+  icon?: any | undefined;
 }
 
 const Links: React.FC<Props> = ({ onClick, path, name, style, icon }) => {

@@ -1,32 +1,32 @@
+import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useState, useEffect, FormEvent } from "react";
-import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 
+import { login } from "../../States/Api/Auth";
 import SigninComponent from "../../components/Auth/SigninForm";
-import { login } from "../../Redux/Action/Auth";
+import { useAuthDispatch, useAuthState } from "../../States/Context/Auth";
 
 function Signin() {
   const [state, setstate] = useState({ email: "", password: "" });
-  const [error, seterror] = useState({});
+  const [info, setinfo] = useState({});
 
   const router = useRouter();
-  const dispatch = useDispatch();
-  const Auth = useSelector((state: RootStateOrAny) => state.Auth);
+  const { error, type } = useAuthState();
+  const dispatch = useAuthDispatch();
 
   useEffect(() => {
-    if (Auth.type == "login") {
-      seterror(Auth.error);
+    if (type == "LOGIN") {
+      setinfo(error);
     }
-  }, [Auth]);
+  }, [error, type]);
 
   const handleChange = (e) => {
     setstate({ ...state, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
-    dispatch(login(state, router));
+    login(state, router, dispatch);
   };
 
   return (
@@ -34,7 +34,7 @@ function Signin() {
       handleChange={handleChange}
       state={state}
       handleSubmit={handleSubmit}
-      error={error}
+      error={info}
     />
   );
 }

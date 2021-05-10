@@ -1,5 +1,4 @@
 import fs from "fs";
-import { getConnection } from "typeorm";
 import { Post } from "../entities/post";
 import { Sub } from "../entities/sub";
 
@@ -36,7 +35,9 @@ export const getSub = async (req, res) => {
       sub.posts.forEach((p) => p.setUserVote(res.locals.user));
     }
 
-    res.json({ sub });
+    console.log(sub);
+
+    res.json(sub);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -68,7 +69,7 @@ export const subImage = async (req, res) => {
   }
 };
 
-export const allSub = async (req, res) => {
+export const topSub = async (req, res) => {
   try {
     const subs = await Sub.find({ order: { createdAt: "DESC" } });
 

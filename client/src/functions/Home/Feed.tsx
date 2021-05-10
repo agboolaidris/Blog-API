@@ -1,15 +1,11 @@
 import React, { useEffect } from "react";
-import { RootStateOrAny, useSelector, useDispatch } from "react-redux";
+import useSWR from "swr";
+
 import Card from "../../components/Home/Card";
-import { fetchPosts } from "../../Redux/Action/Post";
+import { Post } from "../../helper/types";
 
 function Feed() {
-  const dispatch = useDispatch();
-  const posts = useSelector((state: RootStateOrAny) => state.Post.posts);
-
-  useEffect(() => {
-    dispatch(fetchPosts());
-  }, [dispatch]);
+  const { data: posts } = useSWR("/post");
 
   return (
     <>

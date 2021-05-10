@@ -1,13 +1,11 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import { RootStateOrAny, useSelector } from "react-redux";
+import { useAuthState } from "../States/Context/Auth";
 
 export const publicRoute = () => {
   const router = useRouter();
 
-  const isAuthenticated = useSelector(
-    (state: RootStateOrAny) => state.Auth.isAuthenticated
-  );
+  const { isAuthenticated } = useAuthState();
 
   useEffect(() => {
     if (isAuthenticated) {

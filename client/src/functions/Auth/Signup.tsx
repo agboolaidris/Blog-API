@@ -1,9 +1,9 @@
-import React, { useState, useEffect, FormEvent, ChangeEvent } from "react";
-import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect, FormEvent } from "react";
 import { useRouter } from "next/router";
 
 import SignUpComponent from "../../components/Auth/SignupForm";
-import { register } from "../../Redux/Action/Auth";
+import { useAuthDispatch, useAuthState } from "../../States/Context/Auth";
+import { register } from "../../States/Api/Auth";
 
 function Signup() {
   const [state, setstate] = useState({
@@ -12,17 +12,17 @@ function Signup() {
     password: "",
     password2: "",
   });
-  const [error, seterror] = useState({});
+  const [info, setinfo] = useState({});
 
   const router = useRouter();
-  const dispatch = useDispatch();
-  const Auth = useSelector((state: RootStateOrAny) => state.Auth);
+  const { error, type } = useAuthState();
+  const dispatch = useAuthDispatch();
 
   useEffect(() => {
-    if (Auth.type == "register") {
-      seterror(Auth.error);
+    if (type == "REGISTER") {
+      setinfo(error);
     }
-  }, [Auth]);
+  }, [error, type]);
 
   const handleChange = (e: any) => {
     setstate({
@@ -33,7 +33,7 @@ function Signup() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    dispatch(register(state, router));
+    register(state, router, dispatch);
   };
 
   return (
@@ -41,7 +41,7 @@ function Signup() {
       state={state}
       handleChange={handleChange}
       handleSubmit={handleSubmit}
-      error={error}
+      error={info}
     />
   );
 }

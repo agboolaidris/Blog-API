@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
-import { RootStateOrAny, useSelector } from "react-redux";
 import Guest from "./Guest";
 import Client from "./Client";
 import classNames from "classnames";
 import Link from "next/link";
 import Image from "next/image";
 import Search from "../shared/Search";
+import { useAuthState } from "../../States/Context/Auth";
 
 function Nav() {
   const { pathname } = useRouter();
@@ -16,6 +16,8 @@ function Nav() {
   const routeNotIncluded = notIncludeRoute.includes(pathname);
 
   const [state, setstate] = useState(false);
+  const { isAuthenticated } = useAuthState();
+
   const handleClick = () => {
     if (state) {
       setstate(false);
@@ -23,10 +25,6 @@ function Nav() {
       setstate(true);
     }
   };
-
-  const isAuthenticated = useSelector(
-    (state: RootStateOrAny) => state.Auth.isAuthenticated
-  );
 
   return (
     <header

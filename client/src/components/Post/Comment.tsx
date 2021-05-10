@@ -1,11 +1,53 @@
+import Image from "next/image";
 import React from "react";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
 import Vote from "../../functions/Home/Vote";
-import { Comment as CommentType, Post, PostComment } from "../../helper/types";
+import { Comment as CommentType, Post } from "../../helper/types";
+import ActionBution from "../shared/ActionButton";
+import {
+  faCommentDots,
+  faSave,
+  faShareAlt,
+} from "@fortawesome/free-solid-svg-icons";
+dayjs.extend(relativeTime);
 
 function Comment({ post, comment }: { post: Post; comment: CommentType }) {
   return (
-    <div className="flex">
-      <p className="">{comment.body}</p>
+    <div className="flex p-2">
+      <div className="mr-2">
+        <img
+          src="https://uxwing.com/wp-content/themes/uxwing/download/12-people-gesture/avatar.png"
+          width="15"
+          height="15"
+          className="cursor-pointer "
+        />
+      </div>
+      <div className="">
+        <div className="flex text-xs text-opacity-50">
+          <p>{comment.username}</p>
+          <p className="ml-3 text-gray-500">
+            {" "}
+            {dayjs(post?.createdAt).fromNow()}
+          </p>
+        </div>
+        <p className="mt-4 text-xs text-gray-600">{comment.body}</p>
+        <div className="flex mt-3 text-sm text-gray-600">
+          <div className="flex justify-between w-10">
+            <Vote
+              Uservote={comment.UserVote}
+              identifier={post.identifier}
+              slug={post.slug}
+              voteScore={comment.voteScore}
+              commentIdentifier={comment.identifier}
+            />
+          </div>
+          <ActionBution icon={faCommentDots} name="reply" href={post.url} />
+          <ActionBution icon={faShareAlt} name="share" href={post.url} />
+          <ActionBution icon={faSave} name="reply" href={post.url} />
+        </div>
+      </div>
     </div>
   );
 }

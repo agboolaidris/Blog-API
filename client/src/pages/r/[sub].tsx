@@ -1,32 +1,33 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import React from "react";
-import { useSelector, RootStateOrAny } from "react-redux";
+import useSWR from "swr";
 import Banner from "../../functions/Sub/Banner";
-import Sidebar from "../../functions/Sub/Sidebar";
-import SubPost from "../../functions/Sub/Sub";
-import { Sub as SubType } from "../../helper/types";
+import Feed from "../../functions/Sub/feed";
 
 function Sub() {
-  const sub: SubType = useSelector(
-    (state: RootStateOrAny) => state.Post.sub.sub
-  );
+  const router = useRouter();
+  const query = router.query.sub;
+  const { data: sub } = useSWR(query ? `/sub/${query}` : null);
+  console.log(sub);
+
   return (
     <div>
       <Head>
-        <title>{sub?.title}</title>
+        <title>{sub && sub.title}</title>
       </Head>
-      <>
-        <Banner />
-        <div className="flex px-3 md:px-5 wrapper ">
-          <div className="px-5">
-            <SubPost />
-          </div>
-
-          <div className="hidden mt-3 w-72 sm:block min-h-screen-10">
-            <Sidebar />
-          </div>
-        </div>
-      </>
+      <div>
+        {
+          <>
+            {sub && (
+              <>
+                <Banner sub={sub} />
+                <Feed sub={sub} />
+              </>
+            )}
+          </>
+        }
+      </div>
     </div>
   );
 }

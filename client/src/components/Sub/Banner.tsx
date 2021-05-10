@@ -28,12 +28,12 @@ const BannerComp: React.FC<subProps> = ({
         })}
         onClick={() => openInput("banner")}
       >
-        {sub?.bannerUrl && <Image src={sub.bannerUrl} layout="fill" />}
+        {sub.bannerUrl && <Image src={sub.bannerUrl} layout="fill" />}
       </div>
 
       <div className="relative bg-gray-200 ">
         <div className="flex items-center px-3 py-1 sm:h-16 wrapper md:px5">
-          {sub?.imageUrl && (
+          {sub.imageUrl && (
             <div
               className={classNames("absolute  -top-4", {
                 "cursor-pointer": isSubOwner,
@@ -50,9 +50,9 @@ const BannerComp: React.FC<subProps> = ({
           )}
           <div className="ml-20">
             <p className="font-bold text-gray-800 text-md sm:text-xl ">
-              {sub?.title}
+              {sub.title}
             </p>
-            <p className="text-xs text-gray-500">r/{sub?.name}</p>
+            <p className="text-xs text-gray-500">r/{sub.name}</p>
           </div>
         </div>
       </div>

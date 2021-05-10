@@ -23,7 +23,7 @@ function Signin() {
           <SigninForm />
           <div className="flex justify-between mt-3">
             <Link
-              path="signin"
+              path="/signin"
               name="forget password"
               style="text-blue-600"
               onClick={null}

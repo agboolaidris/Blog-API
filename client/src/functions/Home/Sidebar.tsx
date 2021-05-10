@@ -1,21 +1,12 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
+import useSWR from "swr";
+
 import SideBarComp from "../../components/Home/Sidebar";
-import { fetchTopSub } from "../../Redux/Action/Post";
 
 function Sidebar() {
-  const dispatch = useDispatch();
-  const topSub = useSelector((state: RootStateOrAny) => state.Post.topSub);
+  const { data: topSub } = useSWR("/sub/");
 
-  useEffect(() => {
-    dispatch(fetchTopSub());
-  }, [dispatch]);
-
-  return (
-    <>
-      <SideBarComp topSub={topSub} />
-    </>
-  );
+  return <>{topSub && <SideBarComp topSub={topSub} />}</>;
 }
 
 export default Sidebar;

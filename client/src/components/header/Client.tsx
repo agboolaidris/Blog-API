@@ -1,13 +1,12 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { logout } from "../../Redux/Action/Auth";
+import { logout } from "../../States/Api/Auth";
+import { useAuthDispatch } from "../../States/Context/Auth";
 
 function Client({ setstate }) {
-  const dispatch = useDispatch();
-
+  const dispatch = useAuthDispatch();
   const handleLogout = () => {
-    dispatch(logout());
     setstate(false);
+    logout(dispatch);
   };
 
   return (

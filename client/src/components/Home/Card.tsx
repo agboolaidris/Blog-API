@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Vote from "../../functions/Home/Vote";
+import ActionBution from "../shared/ActionButton";
 
 dayjs.extend(relativeTime);
 
@@ -29,7 +30,7 @@ const Card = ({ post }) => {
       {/* post section */}
 
       <div className="w-full px-2 py-1 text-xs sm:px-3 bg-gray-50">
-        <div className="flex ">
+        <div className="flex">
           <Link href={`/r/${post?.subName}`}>
             <a className="flex ml-2 text-xs cursor-pointer hover:text-red-600">
               <img
@@ -44,10 +45,12 @@ const Card = ({ post }) => {
 
           <div className="flex ml-2 text-gray-500">
             <span>Posted-By</span>
+
             <Link href={`/u/user`}>
               <a className="ml-1 hover:text-red-600">{post?.username}</a>
             </Link>
           </div>
+
           <Link href={`${post?.url}`}>
             <a className="ml-2 hover:text-red-600 hover:underline">
               {dayjs(post?.createdAt).fromNow()}
@@ -60,27 +63,19 @@ const Card = ({ post }) => {
             {post?.title}
           </a>
         </Link>
+
         {post.body && <p className="text-sm text-gray-500">{post.body}</p>}
 
         <div className="flex mt-2 text-gray-400">
-          <Link href={`${post?.url}`}>
-            <div className="flex items-center p-px rounded cursor-pointer hover:bg-gray-300">
-              <FontAwesomeIcon icon={faCommentAlt} />
-              <span className="ml-1">{post?.commentCount} comment</span>
-            </div>
-          </Link>
-          <Link href={`${post?.url}`}>
-            <div className="flex items-center p-px ml-2 rounded cursor-pointer hover:bg-gray-300">
-              <FontAwesomeIcon icon={faShare} />
-              <span className="ml-1">Share</span>
-            </div>
-          </Link>
-          <Link href={`${post?.url}`}>
-            <div className="flex items-center p-px ml-2 rounded cursor-pointer hover:bg-gray-300">
-              <FontAwesomeIcon icon={faBookmark} />
-              <span className="ml-1">Save</span>
-            </div>
-          </Link>
+          <ActionBution
+            name={`${post?.commentCount} comment`}
+            icon={faCommentAlt}
+            href={post?.url}
+          />
+
+          <ActionBution name="share" icon={faShare} href={post?.url} />
+
+          <ActionBution name="save" icon={faBookmark} href={post?.url} />
         </div>
       </div>
     </div>
