@@ -10,6 +10,7 @@ import authRoute from "./routes/auth";
 import postRoute from "./routes/post";
 import subRoute from "./routes/sub";
 import voteRoute from "./routes/vote";
+import userRoute from "./routes/user";
 
 dotenv.config();
 
@@ -40,6 +41,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/post", postRoute);
 app.use("/api/sub", subRoute);
 app.use("/api/vote", voteRoute);
+app.use("/api/user", userRoute);
 
 app.listen(PORT, async () => {
   console.log(`app is listen on port ${PORT}!`);

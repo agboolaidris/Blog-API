@@ -26,7 +26,7 @@ const InputText: React.FC<InputTextProps> = ({
 }) => {
   return (
     <div>
-      <div className={`relative w-full h-10 ${style} `}>
+      <div className={`relative w-full h-10 mt-4 ${style} `}>
         {icon && (
           <label className="absolute flex items-center h-full mx-2 text-gray-300">
             <FontAwesomeIcon icon={icon} />

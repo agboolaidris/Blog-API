@@ -7,6 +7,8 @@ import CreatePostForm from "../../../functions/Post/CreatePost";
 import Sidebar from "../../../components/shared/Sidebar";
 import { Sub } from "../../../helper/types";
 import { useAuthState } from "../../../States/Context/Auth";
+import { GetServerSideProps } from "next";
+import axios from "axios";
 
 function CreatePost() {
   const router = useRouter();
@@ -21,7 +23,7 @@ function CreatePost() {
       <Head>
         <title>{sub && sub.name}</title>
       </Head>
-      <div className="flex p-3 mt-2 bg-gray-200 rounded wrapper">
+      <div className="flex p-3 bg-gray-200 rounded sm:mt-2 wrapper">
         <div className="w-full">
           <CreatePostForm sub={sub} />
         </div>
@@ -34,3 +36,16 @@ function CreatePost() {
 }
 
 export default CreatePost;
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  try {
+    const cookie = req.headers.cookie;
+    console.log(cookie);
+    if (!cookie) throw new Error("redirect");
+    await axios.get("/auth/me", { headers: { cookie } });
+
+    return { props: {} };
+  } catch (error) {
+    res.writeHead(307, { location: "/signin" }).end();
+  }
+};

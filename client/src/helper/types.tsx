@@ -41,6 +41,7 @@ export interface Comment {
   username: string;
   UserVote: number;
   voteScore: number;
+  post?: Post;
 }
 
 export interface PostComment {

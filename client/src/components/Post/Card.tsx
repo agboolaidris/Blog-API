@@ -46,7 +46,7 @@ const Card = ({ post }: { post: Post }) => {
 
               <div className="flex ml-2 text-gray-500">
                 <span>Posted-By</span>
-                <Link href={`/u/user`}>
+                <Link href={`/u/${post.username}`}>
                   <a className="ml-1 hover:text-red-600">{post.username}</a>
                 </Link>
               </div>

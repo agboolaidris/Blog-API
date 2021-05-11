@@ -19,12 +19,14 @@ function Sidebar({ topSub }) {
               key={index}
             >
               <Link href={`/r/${sub.name}`}>
-                <Image
-                  src={sub.imageUrl}
-                  width={40}
-                  height={40}
-                  className="overflow-hidden rounded-full cursor-pointer"
-                />
+                <a>
+                  <Image
+                    src={sub.imageUrl}
+                    width={40}
+                    height={40}
+                    className="overflow-hidden rounded-full cursor-pointer"
+                  />
+                </a>
               </Link>
               <Link href={`/r/${sub.name}`}>
                 <a className="ml-2 text-sm cursor-pointer hover:text-red-500">

@@ -8,14 +8,14 @@ import Card from "../../components/Home/Card";
 function Feed({ sub }: { sub: Sub }) {
   const { isAuthenticated } = useAuthState();
   return (
-    <div className="flex px-3 md:px-5 wrapper ">
-      <div className="w-full px-5">
+    <div className="flex flex-col-reverse px-3 sm:flex-row md:px-5 wrapper ">
+      <div className="w-full px-1 sm:px-5">
         {sub.posts.map((post, index) => (
           <Card post={post} key={index} />
         ))}
       </div>
 
-      <div className="hidden mt-3 w-72 sm:block min-h-screen-10">
+      <div className="w-full mt-2 sm:mt-3 sm:w-72 sm:block min-h-screen-10">
         <SidebarComp sub={sub} isAuthenticated={isAuthenticated} />
       </div>
     </div>

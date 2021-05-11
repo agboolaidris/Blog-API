@@ -9,7 +9,7 @@ import PostComment from "./PostComment";
 function Post({ post, comments }: { post: PostType; comments: Comment[] }) {
   const { isAuthenticated } = useAuthState();
   return (
-    <div className="flex wrapper ">
+    <div className="flex flex-col-reverse px-2 sm:flex-row wrapper ">
       <div className="w-full mt-2 bg-gray-100 min-h-screen-20">
         {post && <Card post={post} />}
 
@@ -22,7 +22,7 @@ function Post({ post, comments }: { post: PostType; comments: Comment[] }) {
             <CommentComp comment={comment} key={index} post={post} />
           ))}
       </div>
-      <div className="hidden mt-2 ml-2 sm:block w-72">
+      <div className="w-full mt-2 sm:ml-2 sm:block sm:w-72">
         {post && <Sidebar sub={post.sub} isAuthenticated={isAuthenticated} />}
       </div>
     </div>
