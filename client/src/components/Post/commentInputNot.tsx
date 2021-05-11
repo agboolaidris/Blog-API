@@ -3,7 +3,7 @@ import Links from "../../components/shared/Link";
 function CommentInputNot() {
   return (
     <div className="flex items-center justify-between h-20 px-2 mx-3 my-4 text-sm text-gray-600 border border-gray-400 rounded">
-      <p>Log in or sign up to leave a commen Log In</p>
+      <p>Log in or sign up to leave a comment</p>
       <div className="flex ">
         <Links
           name="sign in"

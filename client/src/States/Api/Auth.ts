@@ -1,4 +1,5 @@
 import axios from "axios";
+import { NextRouter } from "next/router";
 import { User } from "../../helper/types";
 import * as types from "../types";
 
@@ -32,13 +33,13 @@ export const register = async (
 
 export const login = async (
   state: { email: string; password: string },
-  router: any,
+  router: NextRouter,
   dispatch: any
 ) => {
   try {
     const { data }: { data: User } = await axios.post("/auth/login", state);
     dispatch({ type: types.LOGIN_SUCCESS, payload: data });
-    router.push("/");
+    router.back();
   } catch (error) {
     dispatch({ type: types.LOGIN_ERROR, payload: error.response.data });
   }

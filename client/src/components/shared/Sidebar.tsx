@@ -48,7 +48,7 @@ function Sidebar({
             </span>
           </p>
           {isAuthenticated && (
-            <Link href={`/r/${sub.name}/post`}>
+            <Link href={`/r/${sub.name}/submit`}>
               <a className="block py-1 m-2 text-sm text-center text-white bg-blue-600 rounded cursor-pointer hover:bg-red-500">
                 Post
               </a>

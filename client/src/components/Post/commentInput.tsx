@@ -1,16 +1,39 @@
 import React from "react";
 import { User } from "../../helper/types";
-import Button from "../shared/Button";
+import classNames from "classnames";
 
-function CommentInput({ user }: { user: User }) {
+function CommentInput({
+  user,
+  comment,
+  setcomment,
+  handleSubmit,
+}: {
+  user: User;
+  comment: string;
+  setcomment: any;
+  handleSubmit: (e: any) => void;
+}) {
   return (
     <div className="mx-4 my-3">
       <p className="mb-1 text-xs text-gray-500">Comment as {user.username}</p>
-      <form>
-        <div className="border border-gray-500">
-          <input className="block w-full p-1 bg-transparent border-none outline-none min-h-screen-10" />
+      <form onSubmit={handleSubmit}>
+        <div className="border border-gray-300 rounded focus-within:border-gray-700">
+          <textarea
+            onChange={(e) => setcomment(e.target.value)}
+            value={comment}
+            className="block w-full p-1 bg-transparent border-none outline-none focus:text-gray-800 min-h-screen-10"
+          ></textarea>
           <div className="flex justify-end p-1 text-xs bg-gray-200">
-            <button className="px-3 py-1 text-xs text-white bg-blue-500 rounded-3xl">
+            <button
+              className={classNames(
+                "px-3 py-1 text-xs text-white  border-none outline-none cursor-pointer rounded-3xl",
+                {
+                  "bg-blue-200": comment.trim() === "",
+                  "bg-blue-500": !(comment.trim() === ""),
+                }
+              )}
+              disabled={comment.trim() === ""}
+            >
               comment
             </button>
           </div>

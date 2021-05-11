@@ -10,7 +10,7 @@ function Post({ post, comments }: { post: PostType; comments: Comment[] }) {
   const { isAuthenticated } = useAuthState();
   return (
     <div className="flex wrapper ">
-      <div className="mt-2 bg-gray-100 min-h-screen-20">
+      <div className="w-full mt-2 bg-gray-100 min-h-screen-20">
         {post && <Card post={post} />}
 
         <PostComment post={post} />

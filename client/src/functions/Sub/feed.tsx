@@ -9,7 +9,7 @@ function Feed({ sub }: { sub: Sub }) {
   const { isAuthenticated } = useAuthState();
   return (
     <div className="flex px-3 md:px-5 wrapper ">
-      <div className="px-5">
+      <div className="w-full px-5">
         {sub.posts.map((post, index) => (
           <Card post={post} key={index} />
         ))}

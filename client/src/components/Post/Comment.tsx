@@ -15,7 +15,7 @@ dayjs.extend(relativeTime);
 
 function Comment({ post, comment }: { post: Post; comment: CommentType }) {
   return (
-    <div className="flex p-2">
+    <div className="flex p-2 mt-2">
       <div className="mr-2">
         <img
           src="https://uxwing.com/wp-content/themes/uxwing/download/12-people-gesture/avatar.png"
@@ -29,11 +29,11 @@ function Comment({ post, comment }: { post: Post; comment: CommentType }) {
           <p>{comment.username}</p>
           <p className="ml-3 text-gray-500">
             {" "}
-            {dayjs(post?.createdAt).fromNow()}
+            {dayjs(comment?.createdAt).fromNow()}
           </p>
         </div>
-        <p className="mt-4 text-xs text-gray-600">{comment.body}</p>
-        <div className="flex mt-3 text-sm text-gray-600">
+        <p className="mt-2 text-xs text-gray-600">{comment.body}</p>
+        <div className="flex mt-2 text-sm text-gray-600">
           <div className="flex justify-between w-10">
             <Vote
               Uservote={comment.UserVote}

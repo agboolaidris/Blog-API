@@ -3,14 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 
 interface InputTextProps {
-  icon: any | undefined;
-  required: boolean;
+  icon?: any | undefined;
+  required?: boolean;
   type: string;
-  info: string | undefined;
+  info?: string | undefined;
   placeholder: string;
   name: string;
   value: string;
-  onChange: () => void;
+  onChange?: (e: any) => void;
+  style?: string;
 }
 const InputText: React.FC<InputTextProps> = ({
   icon,
@@ -21,10 +22,11 @@ const InputText: React.FC<InputTextProps> = ({
   onChange,
   value,
   name,
+  style,
 }) => {
   return (
     <div>
-      <div className="relative w-full h-10 mt-4 ">
+      <div className={`relative w-full h-10 ${style} `}>
         {icon && (
           <label className="absolute flex items-center h-full mx-2 text-gray-300">
             <FontAwesomeIcon icon={icon} />
@@ -34,7 +36,7 @@ const InputText: React.FC<InputTextProps> = ({
           required={required}
           className={classNames(
             "w-full h-full rounded-md hover:bg-gray-100 px-4 placeholder-opacity-50 bg-transparent border border-gray-300 outline-none focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent placeholder-gray-700",
-            { "pl-7": icon, "border-pink-600": info }
+            { "pl-7": icon, "border-red-600": info }
           )}
           placeholder={placeholder}
           type={type}
@@ -43,7 +45,7 @@ const InputText: React.FC<InputTextProps> = ({
           name={name}
         />
       </div>
-      <span className="mt-2 text-sm text-pink-600">{info}</span>
+      <span className="mt-2 text-sm text-red-600">{info}</span>
     </div>
   );
 };
