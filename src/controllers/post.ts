@@ -1,8 +1,9 @@
+import { Request, Response } from "express";
 import { Comment } from "../entities/comment";
 import { Post } from "../entities/post";
 import { Sub } from "../entities/sub";
 
-export const createPost = async (req, res) => {
+export const createPost = async (req: Request, res: Response) => {
   const { title, body, sub } = req.body;
   try {
     if (title.trim() === "")
@@ -24,11 +25,18 @@ export const createPost = async (req, res) => {
   }
 };
 
-export const fetchPosts = async (req, res) => {
+export const fetchPosts = async (req: Request, res: Response) => {
   try {
+    const page: any = req.query.page;
+    const count: any = req.query.count;
+    const currentPage: number = (page | 0) as number;
+    const postPerPage: number = (count | 8) as number;
+
     const posts = await Post.find({
       order: { createdAt: "DESC" },
       relations: ["comments", "comments.votes", "votes", "sub"],
+      skip: currentPage * postPerPage,
+      take: postPerPage,
     });
 
     if (res.locals.user) {
@@ -41,7 +49,7 @@ export const fetchPosts = async (req, res) => {
   }
 };
 
-export const fetchPost = async (req, res) => {
+export const fetchPost = async (req: Request, res: Response) => {
   const { identifier, slug } = req.params;
   try {
     const post: Post = await Post.findOneOrFail(
@@ -65,7 +73,7 @@ export const fetchPost = async (req, res) => {
   }
 };
 
-export const commentPost = async (req, res) => {
+export const commentPost = async (req: Request, res: Response) => {
   const { identifier, slug } = req.params;
   const { body } = req.body;
 
@@ -86,7 +94,7 @@ export const commentPost = async (req, res) => {
   }
 };
 
-export const fetchComment = async (req, res) => {
+export const fetchComment = async (req: Request, res: Response) => {
   const { identifier, slug } = req.params;
   try {
     const post: Post = await Post.findOneOrFail(

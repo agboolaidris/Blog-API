@@ -6,14 +6,20 @@ import { Post } from "../../helper/types";
 import { useAuthState } from "../../States/Context/Auth";
 import { comment as uploadComment } from "../../States/Api/post";
 
-function PostComment({ post }: { post: Post }) {
+function PostComment({
+  post,
+  revalidate,
+}: {
+  post: Post;
+  revalidate?: Function;
+}) {
   const { isAuthenticated, user } = useAuthState();
   const [comment, setcomment] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (comment.trim() === "") return;
-    uploadComment(comment, post.identifier, post.slug);
+    uploadComment(comment, post.identifier, post.slug, revalidate);
     setcomment("");
   };
   return (

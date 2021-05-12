@@ -1,8 +1,12 @@
+import { NextFunction, Request, Response } from "express";
 import fs from "fs";
-import jwt from "jsonwebtoken";
 import { Sub } from "../entities/sub";
 
-const userSubMiddleware = async (req, res, next) => {
+const userSubMiddleware = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const type = req.body.type;
   try {
     const sub: Sub = await Sub.findOne({ name: req.params.name });

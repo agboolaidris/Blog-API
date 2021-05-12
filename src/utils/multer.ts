@@ -1,5 +1,4 @@
 import multer, { FileFilterCallback } from "multer";
-import path from "path";
 import { makeId } from "./helper";
 const storage = multer.diskStorage({
   destination: "public/images",
@@ -8,7 +7,7 @@ const storage = multer.diskStorage({
   },
 });
 
-const fileFilter = (_, file: any, cb: FileFilterCallback) => {
+const fileFilter = (_: any, file: any, cb: FileFilterCallback) => {
   if (
     file.mimetype === "image/jpeg" ||
     file.mimetype === "image/png" ||

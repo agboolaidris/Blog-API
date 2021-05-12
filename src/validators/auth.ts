@@ -1,7 +1,12 @@
 import { User } from "../entities/User";
 import bcrypt from "bcrypt";
+import { NextFunction, Request, Response } from "express";
 
-export const loginValidator = async (req, res, next) => {
+export const loginValidator = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const { email, password } = req.body;
   try {
     let error: any = {};
@@ -26,7 +31,11 @@ export const loginValidator = async (req, res, next) => {
   }
 };
 
-export const registerValidator = async (req, res, next) => {
+export const registerValidator = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const { username, email, password, password2 } = req.body;
 
   try {

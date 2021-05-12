@@ -1,6 +1,6 @@
 // next.config.js
 module.exports = {
   images: {
-    domains: ["localhost", "www.gravatar.com"],
+    domains: [process.env.APP_DOMAIN, "www.gravatar.com"],
   },
 };

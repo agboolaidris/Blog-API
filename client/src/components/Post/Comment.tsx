@@ -13,7 +13,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 dayjs.extend(relativeTime);
 
-function Comment({ post, comment }: { post: Post; comment: CommentType }) {
+function Comment({
+  post,
+  comment,
+  revalidate,
+}: {
+  post: Post;
+  comment: CommentType;
+  revalidate?: Function;
+}) {
   return (
     <div className="flex p-2 mt-2">
       <div className="mr-2">
@@ -41,6 +49,7 @@ function Comment({ post, comment }: { post: Post; comment: CommentType }) {
               slug={post.slug}
               voteScore={comment.voteScore}
               commentIdentifier={comment.identifier}
+              revalidate={revalidate && revalidate}
             />
           </div>
           <ActionBution icon={faCommentDots} name="reply" href={post.url} />

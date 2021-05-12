@@ -1,8 +1,13 @@
+import { NextFunction, Request, Response } from "express";
 import { getRepository } from "typeorm";
 
 import { Sub } from "../entities/sub";
 
-export const subValidator = async (req, res, next) => {
+export const subValidator = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const { name, title } = req.body;
   try {
     const errors: any = {};

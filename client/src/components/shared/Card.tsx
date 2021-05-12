@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -8,15 +9,26 @@ import {
   faCommentAlt,
   faShare,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Vote from "../../functions/Home/Vote";
-import ActionBution from "../shared/ActionButton";
+import ActionBution from "./ActionButton";
+import { Post, Sub } from "../../helper/types";
 
 dayjs.extend(relativeTime);
 
-const Card = ({ post }) => {
+const Card = ({
+  post,
+  revalidate,
+  sub,
+}: {
+  post: Post;
+  revalidate?: Function;
+  sub?: Sub;
+}) => {
   return (
-    <div className="flex mt-3 overflow-hidden border border-gray-200 rounded-md hover:border-gray-400">
+    <div
+      id={post.identifier}
+      className="flex mt-3 overflow-hidden border border-gray-200 rounded-md hover:border-gray-400"
+    >
       {/* vote section */}
       <div className="flex flex-col justify-around px-5 bg-gray-100">
         <Vote
@@ -24,6 +36,7 @@ const Card = ({ post }) => {
           identifier={post?.identifier}
           slug={post?.slug}
           Uservote={post?.UserVote}
+          revalidate={revalidate}
         />
       </div>
 
@@ -33,12 +46,22 @@ const Card = ({ post }) => {
         <div className="flex">
           <Link href={`/r/${post?.subName}`}>
             <a className="flex ml-2 text-xs cursor-pointer hover:text-red-600">
-              <img
-                src="https://uxwing.com/wp-content/themes/uxwing/download/12-people-gesture/avatar.png"
-                width="15"
-                height="15"
-                className="cursor-pointer "
-              />
+              {post.sub && (
+                <Image
+                  src={post.sub.imageUrl}
+                  width="20"
+                  height="20"
+                  className="rounded-full cursor-pointer "
+                />
+              )}
+              {sub && (
+                <Image
+                  src={sub.imageUrl}
+                  width="20"
+                  height="20"
+                  className="rounded-full cursor-pointer "
+                />
+              )}
               <span className="ml-2 ">{`r/${post?.subName}`}</span>
             </a>
           </Link>

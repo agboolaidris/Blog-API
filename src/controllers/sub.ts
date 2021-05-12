@@ -1,9 +1,10 @@
+import { Request, Response } from "express";
 import fs from "fs";
 import { getRepository } from "typeorm";
 import { Post } from "../entities/post";
 import { Sub } from "../entities/sub";
 
-export const createSub = async (req, res) => {
+export const createSub = async (req: Request, res: Response) => {
   const { name, title, description } = req.body;
   try {
     const sub = await new Sub({
@@ -19,7 +20,7 @@ export const createSub = async (req, res) => {
   }
 };
 
-export const getSub = async (req, res) => {
+export const getSub = async (req: Request, res: Response) => {
   const { name } = req.params;
 
   try {
@@ -44,7 +45,7 @@ export const getSub = async (req, res) => {
   }
 };
 
-export const subImage = async (req, res) => {
+export const subImage = async (req: Request, res: Response) => {
   try {
     const sub: Sub = res.locals.sub;
 
@@ -70,7 +71,7 @@ export const subImage = async (req, res) => {
   }
 };
 
-export const topSub = async (req, res) => {
+export const topSub = async (req: Request, res: Response) => {
   try {
     const subs = await Sub.find({ order: { createdAt: "DESC" } });
 
@@ -82,7 +83,7 @@ export const topSub = async (req, res) => {
   }
 };
 
-export const searchSubs = async (req, res) => {
+export const searchSubs = async (req: Request, res: Response) => {
   try {
     const name = req.params.name;
 

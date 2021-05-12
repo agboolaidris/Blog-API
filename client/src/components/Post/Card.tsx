@@ -10,10 +10,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Vote from "../../functions/Home/Vote";
+import Image from "next/image";
 
 dayjs.extend(relativeTime);
 
-const Card = ({ post }: { post: Post }) => {
+const Card = ({ post, revalidate }: { post: Post; revalidate?: Function }) => {
   return (
     <div className="flex overflow-hidden border border-gray-200 ">
       {/* vote section */}
@@ -23,6 +24,7 @@ const Card = ({ post }: { post: Post }) => {
           identifier={post?.identifier}
           slug={post?.slug}
           Uservote={post?.UserVote}
+          revalidate={revalidate && revalidate}
         />
       </div>
 
@@ -34,11 +36,11 @@ const Card = ({ post }: { post: Post }) => {
             <div className="flex ">
               <Link href={`/r/${post.subName}`}>
                 <a className="flex ml-2 text-xs cursor-pointer hover:text-red-600">
-                  <img
-                    src="https://uxwing.com/wp-content/themes/uxwing/download/12-people-gesture/avatar.png"
-                    width="15"
-                    height="15"
-                    className="cursor-pointer"
+                  <Image
+                    src={post.sub?.imageUrl}
+                    width="20"
+                    height="20"
+                    className="rounded-full cursor-pointer "
                   />
                   <span className="ml-2 ">{`r/${post.subName}`}</span>
                 </a>

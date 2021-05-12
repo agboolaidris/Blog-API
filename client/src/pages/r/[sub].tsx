@@ -8,8 +8,7 @@ import Feed from "../../functions/Sub/feed";
 function Sub() {
   const router = useRouter();
   const query = router.query.sub;
-  const { data: sub } = useSWR(query ? `/sub/${query}` : null);
-  console.log(sub);
+  const { data: sub, revalidate } = useSWR(query ? `/sub/${query}` : null);
 
   return (
     <div>
@@ -22,7 +21,7 @@ function Sub() {
             {sub && (
               <>
                 <Banner sub={sub} />
-                <Feed sub={sub} />
+                <Feed sub={sub} revalidate={revalidate} />
               </>
             )}
           </>

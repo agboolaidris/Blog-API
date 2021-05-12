@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import axios from "axios";
 import { SWRConfig } from "swr";
 import { AppProps } from "next/dist/next-server/lib/router/router";
@@ -7,7 +7,7 @@ import Layout from "../layout";
 import "../styles/globals.css";
 import { Provider } from "../States/Context";
 
-axios.defaults.baseURL = "http://localhost:5000/api";
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_BASE_URL + "/api";
 axios.defaults.withCredentials = true;
 
 function MyApp({ Component, pageProps }: AppProps) {

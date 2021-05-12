@@ -1,4 +1,6 @@
-export default (req, res, next) => {
+import { NextFunction, Request, Response } from "express";
+
+export default (req: Request, _: Response, next: NextFunction) => {
   const expection = ["password"];
 
   Object.keys(req.body).forEach((key) => {

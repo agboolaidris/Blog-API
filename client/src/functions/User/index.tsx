@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../../components/Home/Card";
+import Card from "../../components/shared/Card";
 import CommentCard from "../../components/User/CommentCard";
 
 function User({ submission, user }) {

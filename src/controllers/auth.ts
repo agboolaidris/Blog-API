@@ -2,9 +2,9 @@ import { validate } from "class-validator";
 import jwt from "jsonwebtoken";
 import cookie from "cookie";
 import { User } from "../entities/User";
-import { response } from "express";
+import { Request, Response } from "express";
 
-export const register = async (req, res) => {
+export const register = async (req: Request, res: Response) => {
   const { username, email, password } = req.body;
 
   try {
@@ -24,7 +24,7 @@ export const register = async (req, res) => {
   }
 };
 
-export const login = async (req, res) => {
+export const login = async (req: Request, res: Response) => {
   try {
     const token = jwt.sign(
       { username: res.locals.user.username },
@@ -48,7 +48,7 @@ export const login = async (req, res) => {
   }
 };
 
-export const logout = async (req, res) => {
+export const logout = async (req: Request, res: Response) => {
   try {
     res.set(
       "Set-Cookie",
@@ -67,7 +67,7 @@ export const logout = async (req, res) => {
   }
 };
 
-export const isMe = async (req, res) => {
+export const isMe = async (req: Request, res: Response) => {
   try {
     console.log(res.locals.user);
     const user = await User.findOneOrFail({

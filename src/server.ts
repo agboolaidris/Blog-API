@@ -1,4 +1,3 @@
-import "reflect-metadata";
 import { createConnection } from "typeorm";
 import path from "path";
 import express from "express";
@@ -22,7 +21,7 @@ app.use(cookieParser());
 
 //setup bodyparser
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
 //config cors
 app.use(

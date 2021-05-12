@@ -1,9 +1,10 @@
+import { Request, Response } from "express";
 import { Comment } from "../entities/comment";
 import { Post } from "../entities/post";
 import { User } from "../entities/User";
 import { Vote } from "../entities/vote";
 
-export const createVote = async (req, res) => {
+export const createVote = async (req: Request, res: Response) => {
   const { commentIdentifier, value, slug, identifier } = req.body;
 
   if (![1, 0, -1].includes(value))

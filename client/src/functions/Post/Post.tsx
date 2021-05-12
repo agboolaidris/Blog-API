@@ -6,20 +6,33 @@ import CommentComp from "../../components/Post/Comment";
 import { useAuthState } from "../../States/Context/Auth";
 import PostComment from "./PostComment";
 
-function Post({ post, comments }: { post: PostType; comments: Comment[] }) {
+function Post({
+  post,
+  comments,
+  revalidate,
+}: {
+  post: PostType;
+  comments: Comment[];
+  revalidate?: Function;
+}) {
   const { isAuthenticated } = useAuthState();
   return (
     <div className="flex flex-col-reverse px-2 sm:flex-row wrapper ">
       <div className="w-full mt-2 bg-gray-100 min-h-screen-20">
-        {post && <Card post={post} />}
+        {post && <Card post={post} revalidate={revalidate && revalidate} />}
 
-        <PostComment post={post} />
+        <PostComment post={post} revalidate={revalidate && revalidate} />
         <hr />
 
         {post &&
           comments &&
           comments.map((comment, index) => (
-            <CommentComp comment={comment} key={index} post={post} />
+            <CommentComp
+              comment={comment}
+              key={index}
+              post={post}
+              revalidate={revalidate && revalidate}
+            />
           ))}
       </div>
       <div className="w-full mt-2 sm:ml-2 sm:block sm:w-72">

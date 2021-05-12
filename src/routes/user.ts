@@ -1,11 +1,11 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import { Comment } from "../entities/comment";
 import { Post } from "../entities/post";
 import { User } from "../entities/User";
 import userMiddware from "../middleware/user";
 const route = Router();
 
-route.get("/:username", [userMiddware], async (req, res) => {
+route.get("/:username", [userMiddware], async (req: Request, res: Response) => {
   try {
     const user: User = await User.findOneOrFail({
       where: { username: req.params.username },
@@ -32,7 +32,7 @@ route.get("/:username", [userMiddware], async (req, res) => {
     comments.forEach((p) =>
       submission.push({ type: "comment", ...p.toJSON() })
     );
-    submission.sort((a, b) => {
+    submission.sort((a: any, b: any) => {
       if (b.createdAt > a.createdAt) return 1;
       if (b.createdAt < a.createdAt) return -1;
       return 0;

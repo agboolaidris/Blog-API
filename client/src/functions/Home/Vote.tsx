@@ -11,6 +11,7 @@ interface VoteProps {
   Uservote: number;
   identifier: string;
   commentIdentifier?: string;
+  revalidate?: Function;
 }
 
 const Vote: React.FC<VoteProps> = ({
@@ -19,6 +20,7 @@ const Vote: React.FC<VoteProps> = ({
   Uservote,
   identifier,
   commentIdentifier,
+  revalidate,
 }) => {
   const routers = useRouter();
   const { isAuthenticated } = useAuthState();
@@ -29,7 +31,7 @@ const Vote: React.FC<VoteProps> = ({
 
     //check if the value is equal to the previous value
     if (value === Uservote) value = 0;
-    vote({ slug, identifier, value, commentIdentifier });
+    vote({ slug, identifier, value, commentIdentifier }, revalidate);
   };
 
   return (
@@ -39,7 +41,7 @@ const Vote: React.FC<VoteProps> = ({
         style={
           Uservote === 1
             ? "hover:red-red-600 text-red-600"
-            : "hover:text-blue-600 text-gray-600"
+            : "hover:text-red-600 text-gray-600"
         }
         handleClick={() => handleVote(1)}
       />
