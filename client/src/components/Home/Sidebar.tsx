@@ -3,12 +3,13 @@ import Link from "next/link";
 import React from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import Links from "../shared/Link";
 
 function Sidebar({ topSub }) {
   dayjs.extend(relativeTime);
   return (
     <div className="w-full overflow-hidden rounded-t-md">
-      <div className="w-full text-center bg-red-500">
+      <div className="w-full text-center bg-blue-500">
         <p className="pt-6 pb-1 text-white">Top Community</p>
       </div>
       <div className="pt-3 pb-2 bg-gray-100">
@@ -22,8 +23,8 @@ function Sidebar({ topSub }) {
                 <a>
                   <Image
                     src={sub.imageUrl}
-                    width={40}
-                    height={40}
+                    width={30}
+                    height={30}
                     className="overflow-hidden rounded-full cursor-pointer"
                   />
                 </a>
@@ -38,6 +39,11 @@ function Sidebar({ topSub }) {
               </span>
             </div>
           ))}
+        <Links
+          name="Create Community"
+          path="/sub/create"
+          style="bg-blue-500 mx-2 text-center hover:bg-blue-600 cursor-pointer text-white py-2 rounded mt-2"
+        />
       </div>
     </div>
   );

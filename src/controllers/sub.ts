@@ -1,4 +1,5 @@
 import fs from "fs";
+import { getRepository } from "typeorm";
 import { Post } from "../entities/post";
 import { Sub } from "../entities/sub";
 
@@ -76,6 +77,24 @@ export const topSub = async (req, res) => {
     const response = subs.slice(0, 5);
 
     res.json(response);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const searchSubs = async (req, res) => {
+  try {
+    const name = req.params.name;
+
+    if (name.trim() === "") return res.status(404).json({ name: "not found" });
+    const subs = await getRepository(Sub)
+      .createQueryBuilder()
+      .where(`LOWER(name) LIKE :name`, {
+        name: `${name.toLowerCase().trim()}%`,
+      })
+      .getMany();
+
+    res.json(subs);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

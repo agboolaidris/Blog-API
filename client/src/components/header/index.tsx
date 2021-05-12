@@ -7,7 +7,7 @@ import Client from "./Client";
 import classNames from "classnames";
 import Link from "next/link";
 import Image from "next/image";
-import Search from "../shared/Search";
+import Search from "./Search";
 import { useAuthState } from "../../States/Context/Auth";
 
 function Nav() {

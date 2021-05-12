@@ -14,6 +14,7 @@ const Route = Router();
 
 Route.post("/", [AuthMiddleware, trim], createPost);
 Route.get("/", [userMiddleware], fetchPosts);
+
 Route.get("/:identifier/:slug", [userMiddleware], fetchPost);
 Route.post("/:identifier/:slug/comment", [AuthMiddleware], commentPost);
 export default Route;

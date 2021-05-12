@@ -41,7 +41,7 @@ export const login = async (
     dispatch({ type: types.LOGIN_SUCCESS, payload: data });
     router.back();
   } catch (error) {
-    dispatch({ type: types.LOGIN_ERROR, payload: error.response.data });
+    dispatch({ type: types.LOGIN_ERROR, payload: error.response?.data });
   }
 };
 
@@ -49,6 +49,7 @@ export const logout = async (dispatch: any) => {
   try {
     await axios.get("/auth/logout");
     dispatch({ type: types.LOGOUT, payload: null });
+    window.location.reload();
   } catch (error) {
     console.log(error.response);
   }

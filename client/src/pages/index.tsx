@@ -10,7 +10,7 @@ export default function Home() {
         <title>Reddit:Font page of the Internet</title>
         <meta name="description" content="this is the home age" />
       </Head>
-      <div className="flex p-3 mx-auto mt-5 sm:p-0 wrapper ">
+      <div className="flex p-3 mx-auto sm:mt-5 sm:p-0 wrapper ">
         <div className="w-full min-h-150px ">
           <Feed />
         </div>
