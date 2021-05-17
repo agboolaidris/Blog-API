@@ -1,5 +1,6 @@
 const rootDir = process.env.NODE_ENV === "development" ? "src" : "build";
 module.exports = {
+  name: "default",
   type: process.env.DB_DIALECT,
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,

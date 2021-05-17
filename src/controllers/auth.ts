@@ -10,12 +10,6 @@ export const register = async (req: Request, res: Response) => {
   try {
     const user = new User({ username, email, password });
 
-    const errors = await validate(user);
-
-    if (errors.length > 0) {
-      return res.status(400).json(errors);
-    }
-
     await user.save();
 
     res.json(user);
