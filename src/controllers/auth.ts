@@ -1,4 +1,3 @@
-import { validate } from "class-validator";
 import jwt from "jsonwebtoken";
 import cookie from "cookie";
 import { User } from "../entities/User";
