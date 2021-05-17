@@ -28,6 +28,7 @@ app.use(
   cors({
     credentials: true,
     origin: [process.env.ORIGIN, "http://localhost:3000"],
+    exposedHeaders: ["access-token"],
     optionsSuccessStatus: 200,
   })
 );
