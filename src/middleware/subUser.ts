@@ -10,6 +10,7 @@ const userSubMiddleware = async (
   const type = req.body.type;
   try {
     const sub: Sub = await Sub.findOne({ name: req.params.name });
+    if (!sub) return res.status(401).json({ sub: "sub doesnot exist" });
 
     if (sub.username !== res.locals.user.username)
       return res
