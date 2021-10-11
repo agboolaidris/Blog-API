@@ -17,7 +17,7 @@ export const register = async (req: Request, res: Response) => {
   }
 };
 
-export const login = async (req: Request, res: Response) => {
+export const login = async (_: Request, res: Response) => {
   try {
     const token = jwt.sign(
       { username: res.locals.user.username },
@@ -45,7 +45,7 @@ export const logout = async (req: Request, res: Response) => {
   try {
     res.set(
       "Set-Cookie",
-      cookie.serialize("access-token", "", {
+      cookie.serialize("access-token", " ", {
         httpOnly: true,
         // secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
